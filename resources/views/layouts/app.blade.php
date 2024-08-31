@@ -28,6 +28,7 @@
             @endisset
 
             <!-- Page Content -->
+             <p>ksjk</p>
             <main>
                 {{ $slot }}
             </main>
