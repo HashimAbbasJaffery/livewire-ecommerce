@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\Cart;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -11,15 +12,18 @@ class Header extends Component
     public $cart;
     public $overallPrice;
     public function mount() {
-        $this->cart = [];
-        $this->overallPrice = 0;
+        $this->cart = session()->has("cart") ? session()->get("cart") : [];
+        $this->overallPrice = session()->has("overallPrice") ? session()->get("overallPrice") : 0;
     }
     public function render()
     {
-        $cart = $this->cart;
-        return view('livewire.header', compact("cart"));
+        return view('livewire.header');
     }
-    public function smushDuplicateAndPush(array $item, int $quantity) {
+    #[On('update-quantity')]
+    public function changeQuantity($cart) {
+        $this->cart = $cart;
+    }
+    protected function smushDuplicateAndPush(array $item, int $quantity) {
         $flag = false;
         foreach($this->cart as &$inCartItem) {
             if($item["id"] === $inCartItem["id"]) {
@@ -29,6 +33,8 @@ class Header extends Component
         }
 
         if(!$flag) array_push($this->cart, $item);
+
+        session()->put("cart", $this->cart);
     }
 
     #[On('add-to-cart')]
@@ -41,5 +47,22 @@ class Header extends Component
         }, $this->cart));
 
         $this->overallPrice = $price;
+        session()->put("overallPrice", $price);
+
+
+        $this->dispatch('added-to-cart', ['item' => $item]);
+    }
+
+    #[On('remove-from-cart')]
+    public function removeFromCart($id, Cart $cart) {
+        [$remaining_items, $total] = $cart->removeFromCart($this->cart, $id);
+        $this->cart = $remaining_items;
+        session()->put("cart", $this->cart);
+
+        $this->overallPrice = $total;
+        session()->put("overallPrice", $this->overallPrice);
+
+
+        $this->dispatch('removed-from-cart');
     }
 }

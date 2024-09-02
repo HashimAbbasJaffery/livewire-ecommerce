@@ -35,6 +35,6 @@ class Product extends Component
         $this->dispatch('add-to-cart', $item)->to(Header::class);
 
         // Dispatching to the browser
-        $this->dispatch('add-to-cart', ['item' => $item]);
+
     }
 }

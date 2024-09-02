@@ -10,7 +10,7 @@
                         </div><!-- End .product-action-vertical -->
 
                         <div class="product-action">
-                            <a href="#" class="btn-product btn-cart" wire:click="addToCart({{ $product }})"><span>add to cart</span></a>
+                            <a href="#" class="btn-product btn-cart" wire:click.prevent="addToCart({{ $product }})"><span>add to cart</span></a>
                         </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
 

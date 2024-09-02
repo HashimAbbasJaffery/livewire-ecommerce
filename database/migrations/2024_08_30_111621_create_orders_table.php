@@ -15,16 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string("first_name");
             $table->string("last_name");
-            $table->string("company_name")->nullable();
-            $table->string("country");
-            $table->text("address");
+            $table->text("street_address");
+            $table->text("apartment");
             $table->string("city");
-            $table->string("state");
-            $table->string("postcode");
-            $table->string("phone");
             $table->string("email");
-            $table->boolean("status");
-            $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
+            $table->string("phone");
+            $table->text("order_notes")->nullable();
+            $table->integer("status");
+            $table->foreignId("user_id")->nullable()->constrained("users")->cascadeOnDelete();
             $table->timestamps();
         });
     }

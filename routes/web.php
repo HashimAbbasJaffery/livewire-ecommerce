@@ -13,7 +13,9 @@ Route::get('/', function () {
     return view('welcome', compact("products", "new_arrivals"));
 });
 
-Route::get("/products", \App\Livewire\Page\Products::class);
+Route::get("/products", \App\Livewire\Page\Products::class)->name("products");
+Route::get("/cart", \App\Livewire\Page\Cart::class)->name("cart");
+Route::get("/checkout", \App\Livewire\Page\Checkout::class)->name("checkout");
 
 Route::get('/dashboard', function () {
     return view('dashboard');

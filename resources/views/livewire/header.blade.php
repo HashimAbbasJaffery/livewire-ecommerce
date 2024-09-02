@@ -83,46 +83,48 @@
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
                                 <span class="cart-count">{{ count($cart) }}</span>
-                                <span class="cart-txt">PKR {{ $overallPrice }}</span>
+                                <span class="cart-txt">PKR {{ (new \App\Services\Cart())->totalPrice($cart) }}</span>
                             </a>
-
+                            @if(count($cart) > 0)
                             <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
-                                    @foreach($cart as $product)
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="product.html">{{ $product["title"] }}</a>
-                                            </h4>
+                                    <div class="dropdown-cart-products">
+                                        @foreach($cart as $product)
+                                        <div class="product" wire:key="{{ $product['id'] }}">
+                                            <div class="product-cart-details">
+                                                <h4 class="product-title">
+                                                    <a href="product.html">{{ $product["title"] }}</a>
+                                                </h4>
 
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">{{ $product["quantity"] }}</span>
-                                                x ${{ ($product["new_price"] ?? $product["price"]) }}
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">{{ $product["quantity"] }}</span>
+                                                    x ${{ ($product["new_price"] ?? $product["price"]) }}
+                                                </span>
+                                            </div><!-- End .product-cart-details -->
 
-                                        <figure class="product-image-container">
-                                            <a href="product.html" class="product-image">
-                                                <img src="/uploads/{{ $product['images'][0]['image'] }}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-                                    @endforeach
+                                            <figure class="product-image-container">
+                                                <a href="product.html" class="product-image">
+                                                    <img src="/uploads/{{ $product['images'][0]['image'] }}" alt="product">
+                                                </a>
+                                            </figure>
+                                            <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["id"] }}')"><i class="icon-close"></i></a>
+                                        </div><!-- End .product -->
+                                        @endforeach
 
-                                </div><!-- End .cart-product -->
+                                    </div><!-- End .cart-product -->
 
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
+                                    <div class="dropdown-cart-total">
+                                        <span>Total</span>
 
-                                    <span class="cart-total-price">PKR {{ $overallPrice }}</span>
-                                </div><!-- End .dropdown-cart-total -->
+                                        <span class="cart-total-price">PKR {{ (new \App\Services\Cart())->totalPrice($cart) }}</span>
+                                    </div><!-- End .dropdown-cart-total -->
 
-                                <div class="dropdown-cart-action">
-                                    <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
+                                    <div class="dropdown-cart-action">
+                                        <a href="{{ route('cart') }}" class="btn btn-primary">View Cart</a>
+                                        <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                    </div><!-- End .dropdown-cart-total -->
+
+                                </div><!-- End .dropdown-menu -->
+                                @endif
                         </div><!-- End .cart-dropdown -->
                     </div>
                 </div><!-- End .container -->

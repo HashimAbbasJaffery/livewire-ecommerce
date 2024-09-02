@@ -369,9 +369,14 @@
     </div>
     <!-- Plugins JS File -->
     @livewireScripts
-    <script>
-        Livewire.on("add-to-cart", function() {
-            alert("Added something in cart");
+    <script type="module">
+        Livewire.on("added-to-cart", function() {
+            const toast = new Notyf();
+            toast.success({message: "Item has been added in cart!", dismissible: true, duration: 2000});
+        })
+        Livewire.on("removed-from-cart", function() {
+            const toast = new Notyf();
+            toast.success({message: "Item has been removed from cart!", dismissible: true, duration: 2000});
         })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
