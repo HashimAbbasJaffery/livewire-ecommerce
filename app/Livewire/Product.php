@@ -30,6 +30,11 @@ class Product extends Component
     }
 
     public function addToCart($item) {
+
+        // Dispatching To Livewire Component
         $this->dispatch('add-to-cart', $item)->to(Header::class);
+
+        // Dispatching to the browser
+        $this->dispatch('add-to-cart', ['item' => $item]);
     }
 }
