@@ -39,5 +39,9 @@ class Products extends Component
                             ->paginate(8);
         return view('livewire.page.products', compact("categories", "colors", "products"));
     }
+    #[On('ordered-product')]
+    public function ordered() {
+        dd("lol");
+    }
 
 }

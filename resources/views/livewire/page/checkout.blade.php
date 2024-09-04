@@ -29,13 +29,15 @@
 		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
 		                				<div class="row">
 		                					<div class="col-sm-6">
-		                						<label>First Name *</label>
-		                						<input wire:model="first_name" type="text" class="form-control" required>
-		                					</div><!-- End .col-sm-6 -->
+                                                <label>First Name *</label>
+                                                <div class="text-danger">@error('form.first_name') {{ $message }} @enderror</div>
+		                						<input wire:model.blur="form.first_name" type="text" class="form-control @error('form.first_name') border border-danger @enderror" required>
+                                            </div><!-- End .col-sm-6 -->
 
 		                					<div class="col-sm-6">
 		                						<label>Last Name *</label>
-		                						<input wire:model="last_name" type="text" class="form-control" required>
+                                                <div class="text-danger">@error('form.last_name') {{ $message }} @enderror</div>
+		                						<input wire:model.blur="form.last_name" type="text" class="form-control @error('form.last_name') border border-danger @enderror" required>
 		                					</div><!-- End .col-sm-6 -->
 		                				</div><!-- End .row -->
 
@@ -44,19 +46,24 @@
 	            						<!-- <input type="text" class="form-control" required> -->
                                         <p class="mb-2" style="font-weight: bold">Pakistan</p>
 
+
 	            						<label>Street address *</label>
-	            						<input type="text" wire:model="street_address" class="form-control" placeholder="House number and Street name" required>
-	            						<input type="text" wire:model="apartment" class="form-control" placeholder="Appartments, suite, unit etc ..." required>
+                                        <div class="text-danger">@error('form.street_address') {{ $message }} @enderror</div>
+	            						<input type="text" wire:model.blur="form.street_address" class="form-control @error('form.street_address') border border-danger @enderror" placeholder="House number and Street name" required>
+                                        <div class="text-danger">@error('form.apartment') {{ $message }} @enderror</div>
+	            						<input type="text" wire:model.blur="form.apartment" class="form-control @error('form.apartment') border border-danger @enderror" placeholder="Appartments, suite, unit etc ..." required>
 
 	            						<div class="row">
 		                					<div class="col-sm-6">
 		                						<label>Town / City *</label>
-		                						<input wire:model="city" type="text" class="form-control" required>
+                                                <div class="text-danger">@error('form.city') {{ $message }} @enderror</div>
+	            				                <input wire:model.blur="form.city" type="text" class="form-control @error('form.city') border border-danger @enderror" required>
 		                					</div><!-- End .col-sm-6 -->
 
                                             <div class="col-sm-6">
 		                						<label>Email address *</label>
-                                                <input wire:model="email" type="email" class="form-control" required>
+                                                <div class="text-danger">@error('form.email') {{ $message }} @enderror</div>
+                                                <input wire:model.blur="form.email" type="email" class="form-control @error('form.email') border border-danger @enderror" required>
                                             </div><!-- End .col-sm-6 -->
 
 
@@ -66,14 +73,15 @@
 
 		                					<div class="col-sm-6">
 		                						<label>Phone *</label>
-		                						<input wire:model="phone" type="tel" class="form-control" required>
+                                                <div class="text-danger">@error('form.phone') {{ $message }} @enderror</div>
+                                                <input wire:model.blur="form.phone" type="tel" class="form-control @error('form.phone') border border-danger @enderror" required>
 		                					</div><!-- End .col-sm-6 -->
 		                				</div><!-- End .row -->
 
 
 
 	                					<label>Order notes (optional)</label>
-	        							<textarea wire:model="order_notes" class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+	        							<textarea wire:model.blur="form.order_notes" class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
 		                		</div><!-- End .col-lg-9 -->
 		                		<aside class="col-lg-3">
 		                			<div class="summary">

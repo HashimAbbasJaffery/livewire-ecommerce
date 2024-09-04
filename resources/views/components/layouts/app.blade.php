@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="assets/css/plugins/nouislider/nouislider.css">
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://kit.fontawesome.com/3a7e8b6e65.js" crossorigin="anonymous"></script>
     @livewireStyles
 </head>
 
@@ -377,6 +378,15 @@
         Livewire.on("removed-from-cart", function() {
             const toast = new Notyf();
             toast.success({message: "Item has been removed from cart!", dismissible: true, duration: 2000});
+        })
+
+        Livewire.on("ordered", function(messsage) {
+            const toast = new Notyf();
+            toast.success({message: "Your order has been placed!", dismissible: true, duration: 2000});
+        })
+        Livewire.on("error", function(messsage) {
+            const toast = new Notyf();
+            toast.error({message, dismissible: true, duration: 2000});
         })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

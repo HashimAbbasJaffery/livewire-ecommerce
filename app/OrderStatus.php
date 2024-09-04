@@ -2,10 +2,11 @@
 
 namespace App;
 
-enum OrderStatus
+enum OrderStatus: int
 {
     case INPROGRESS = 0;
     case DISPATCHED = 1;
     case DELIVERED = 2;
-    case CANCELLED = 3;
+    case RETURNED = 3;
+    case CANCELLED = 4;
 }
