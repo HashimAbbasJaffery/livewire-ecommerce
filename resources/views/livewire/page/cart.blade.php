@@ -49,7 +49,7 @@
 											<td class="price-col">PKR {{ $product["price"] }}</td>
 											<td class="quantity-col">
                                                 <div class="cart-product-quantity" wire:ignore>
-                                                    <input type="number" class="form-control" wire:model.live="cart.{{$key}}.quantity" value="{{ $product["quantity"] }}" min="1" max="10" step="1" data-decimals="0" required>
+                                                    <input type="number" class="form-control" wire:model.live="cart.{{$key}}.quantity" value="{{ $product["quantity"] }}" min="1" max="100" step="1" data-decimals="0" required>
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
 											<td class="total-col">PKR {{ ($product["new_price"] ?? $product["price"]) * $product["quantity"] }}</td>

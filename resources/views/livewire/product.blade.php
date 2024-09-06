@@ -1,9 +1,15 @@
+
 <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="/uploads/{{ $image }}" loading="lazy" alt="Product image" class="product-image">
-                            <img src="/uploads/{{ $image }}" loading="lazy" alt="Product image" class="product-image-hover">
+<figure class="product-media" style="position: relative;">
+                        <a href="{{ route("product", [ 'product' => $product->id ]) }}" style="height: 253px;">
+                            <img src="/uploads/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image">
+                            <img src="/uploads/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image-hover">
                         </a>
+                        <!-- <div class="spinner" style="display: flex; align-items: center; justify-content: space-around; height: 253px; width: 100%;">
+                            <div class="loader-container">
+                                <div class="loader"></div>
+                            </div>
+                        </div> -->
 
                         <div class="product-action-vertical">
                             <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -25,10 +31,11 @@
 
                         <div class="product-nav product-nav-thumbs">
                             @foreach($product->images as $image)
-                            <a href="#" class="active">
-                                <img src="/uploads/{{ $image->image }}" alt="product desc">
+                            <a @class(['active' => $thumbnail === $image->image]) stye="cursor: pointer;">
+                                <img wire:click="changeThumbnail('{{ $image->image }}')" src="/uploads/{{ $image->image }}" alt="product desc">
                             </a>
                             @endforeach
                         </div><!-- End .product-nav -->
                     </div><!-- End .product-body -->
                 </div><!-- End .product -->
+

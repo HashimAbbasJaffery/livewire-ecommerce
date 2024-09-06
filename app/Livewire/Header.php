@@ -39,6 +39,10 @@ class Header extends Component
 
     #[On('add-to-cart')]
     public function addToCart($item, $quantity = 1) {
+        if(isset($item["item"])) {
+            $quantity = $item["quantity"];
+            $item = $item["item"];
+        }
         $item["quantity"] = $quantity;
         $this->smushDuplicateAndPush($item, $quantity);
 

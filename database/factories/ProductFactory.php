@@ -23,6 +23,7 @@ class ProductFactory extends Factory
             "description" =>  fake()->paragraph(),
             "quantity" => fake()->numberBetween(0, 10),
             "status" => rand(0, 1),
+            "extra_description" => "<p>It is amazing scarf.... You must buy it</p><ul><li>Database</li><li>Migration</li></ul>"
         ];
     }
 }

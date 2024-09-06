@@ -17,6 +17,11 @@ class Cart
         }, $cart));
         return $price;
     }
+    public function quantityValidator($quantity) {
+        if($quantity <= 0) return 1;
+
+        return $quantity;
+    }
     public function removeFromCart($cart, $id) {
         $remaining_items = array_filter($cart, function($inCartItem) use ($id){
             return $inCartItem["id"] != (int)$id;

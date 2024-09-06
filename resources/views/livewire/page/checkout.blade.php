@@ -99,7 +99,12 @@
                                                 @foreach($cart as $product)
                                                     <tr>
                                                         <td><a href="#">{{ $product["title"] }}</a></td>
-                                                        <td>PKR {{ $product["new_price"] ?? $product["price"] }}</td>
+                                                        @php
+                                                            $unit_price = $product["new_price"] ?? $product["price"];
+                                                            $quantity = $product["quantity"];
+                                                            $total = $unit_price * $quantity;
+                                                        @endphp
+                                                        <td>PKR {{ $unit_price }} x {{ $quantity }}</td>
                                                     </tr>
                                                 @endforeach
 		                						<tr class="summary-subtotal">

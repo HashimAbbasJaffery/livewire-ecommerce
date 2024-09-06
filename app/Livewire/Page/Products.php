@@ -33,8 +33,9 @@ class Products extends Component
     public function render()
     {
         $categories = Category::withCount("products")->whereHas("products")->limit(10)->get();
-        $colors = Color::all();
-        $products = Product::filter(["categories" => $this->categoriesList, "colors" => $this->colorsList])
+        $colors = Color::whereHas("images")->get();
+        $products = Product::whereHas("images")
+                            ->filter(["categories" => $this->categoriesList, "colors" => $this->colorsList])
                             ->whereBetween("price", $this->price)
                             ->paginate(8);
         return view('livewire.page.products', compact("categories", "colors", "products"));
