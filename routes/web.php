@@ -4,12 +4,11 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $products = Product::withCount("orders")->whereHas("images")->orderByDesc("orders_count")->limit(4)->get();
-    $new_arrivals = Product::whereHas("images")->latest()->limit(12)->get();
+Route::get("/test", function() {
+    auth()->logout();
+});
 
-    return view('welcome', compact("products", "new_arrivals"));
-})->name("home");
+Route::get('/', \App\Livewire\Page\Home::class)->name("home");
 
 
 Route::get("/product/{product}", \App\Livewire\Page\Product::class)->name("product");

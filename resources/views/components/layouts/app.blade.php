@@ -40,85 +40,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script src="https://kit.fontawesome.com/3a7e8b6e65.js" crossorigin="anonymous"></script>
 
-    <style>
+<style>
 html {
     scroll-behavior: smooth;
-}
-.br {
-  border-radius: 8px;
-}
-.w80 {
-   width: 80%;
-}
-.card {
-  border: 2px solid #fff;
-  box-shadow:0px 0px 10px 0 #a9a9a9;
-  padding: 10px 10px;
-  width: 100%;
-  margin: 50px auto;
-}
-.wrapper {
-  width: 0px;
-  animation: fullView 0.5s forwards cubic-bezier(0.250, 0.460, 0.450, 0.940);
-}
-.profilePic {
-  height: 65px;
-  width: 65px;
-  border-radius: 50%;
-}
-.comment {
-  height: 10px;
-  background: #777;
-  margin-top: 20px;
-}
-
-@keyframes fullView {
-  100% {
-    width: 100%;
-  }
-}
-
-
-.animate {
-   animation : shimmer 2s infinite linear;
-   background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
-    background-size: 1000px 100%;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-
-.loader {
-  width: 10px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 3px solid #0000;
-  border-right-color: #ffa50097;
-  position: relative;
-  animation: l24 1s infinite linear;
-}
-.loader:before,
-.loader:after {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  border: inherit;
-  animation: inherit;
-  animation-duration: 2s;
-}
-.loader:after {
-  animation-duration: 4s;
-}
-@keyframes l24 {
-  100% {transform: rotate(1turn)}
 }
 </style>
     @livewireStyles
@@ -469,6 +393,14 @@ html {
         Livewire.on("error", function(messsage) {
             const toast = new Notyf();
             toast.error({message, dismissible: true, duration: 2000});
+        })
+        Livewire.on("invalid-credentials", function() {
+            const toast = new Notyf();
+            toast.error({message: "Invalid Email or Password", dismissible: true, duration: 4000});
+        })
+        Livewire.on("loggedin", function() {
+            const toast = new Notyf();
+            toast.success({message: "Welcome Back, {{ auth()->user()?->name ?? "none" }}", dismissible: true, duration: 4000});
         })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

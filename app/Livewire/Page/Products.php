@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Page;
 
+use App\SortingEnum;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 use App\Models\Category;
@@ -18,6 +19,7 @@ class Products extends Component
     public $categoriesList;
     public $colorsList;
     public $price;
+    public $sort_by = SortingEnum::POPULARITY->value;
     public function mount() {
         $this->categoriesList = [];
         $this->colorsList = [];
@@ -29,15 +31,23 @@ class Products extends Component
         $this->price[0] = substr($minima, 1);
         $this->price[1] = substr($maxima, 1);
     }
+    protected function filters() : array{
+        return [
+            "categories" => $this->categoriesList,
+            "colors" => $this->colorsList,
+            "sort_by" => $this->sort_by
+        ];
+    }
 
     public function render()
     {
         $categories = Category::withCount("products")->whereHas("products")->limit(10)->get();
         $colors = Color::whereHas("images")->get();
         $products = Product::whereHas("images")
-                            ->filter(["categories" => $this->categoriesList, "colors" => $this->colorsList])
+                            ->filter($this->filters())
                             ->whereBetween("price", $this->price)
                             ->paginate(8);
+        // dd($products);
         return view('livewire.page.products', compact("categories", "colors", "products"));
     }
     #[On('ordered-product')]

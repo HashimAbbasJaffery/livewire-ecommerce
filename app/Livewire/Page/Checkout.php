@@ -18,7 +18,8 @@ class Checkout extends Component
     public function mount() {
 
         $this->status = OrderStatus::INPROGRESS->value;
-        $this->user_id = auth()->user() ?? null;
+        // $this->user_id = auth()->id() ?? null;
+        $this->user_id = auth()->user()?->id ?? null;
         $this->cart = session()->has("cart") ? session()->get("cart") : [];
         abort_if(!$this->cart, 403, "Add Items in cart!");
     }

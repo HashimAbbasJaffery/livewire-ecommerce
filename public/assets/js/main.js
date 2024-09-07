@@ -172,7 +172,7 @@ $(document).ready(function () {
 		noUiSlider.create(priceSlider, {
 			start: [ 0, 750 ],
 			connect: true,
-			step: 50,
+			step: 1,
 			margin: 200,
 			range: {
 				'min': 0,

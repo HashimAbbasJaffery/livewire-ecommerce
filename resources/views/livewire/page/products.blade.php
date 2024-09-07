@@ -15,18 +15,6 @@
                 					</div><!-- End .toolbox-info -->
                 				</div><!-- End .toolbox-left -->
 
-                				<div class="toolbox-right">
-                					<div class="toolbox-sort">
-                						<label for="sortby">Sort by:</label>
-                						<div class="select-custom">
-											<select name="sortby" id="sortby" class="form-control">
-												<option value="1" selected="selected">Sort By popularity</option>
-												<option value="2" selected="selected">Sort By price: low to high</option>
-												<option value="3" selected="selected">Sort By price: high to low</option>
-											</select>
-										</div>
-                					</div><!-- End .toolbox-sort -->
-                				</div><!-- End .toolbox-right -->
                 			</div><!-- End .toolbox -->
 
                             <div class="products mb-3">
@@ -61,11 +49,7 @@
 							</nav> -->
                 		</div><!-- End .col-lg-9 -->
                 		<aside class="col-lg-3 order-lg-first">
-                			<div class="sidebar sidebar-shop">
-                				<div class="widget widget-clean">
-                					<label>Filters:</label>
-                					<a href="#" class="sidebar-filter-clear">Clean All</a>
-                				</div><!-- End .widget widget-clean -->
+                			<div class="sidebar sidebar-shop"><!-- End .widget widget-clean -->
 
                 				<div class="widget widget-collapsible">
     								<h3 class="widget-title">

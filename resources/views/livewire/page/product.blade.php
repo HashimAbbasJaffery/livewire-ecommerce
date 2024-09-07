@@ -127,7 +127,7 @@
                                                         <h3>Variants</h3>
                                                         <div style="display: flex;">
                                                             @foreach ($product->images as $image)
-                                                                <img src="/uploads/{{ $image->image }}" style="@if($loop->first) border: 1px solid yellow; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer;" alt="">
+                                                                <img wire:click="changeSelected('{{ $image->image }}')" src="/uploads/{{ $image->image }}" style="@if($selected === $image->image) border: 1px solid yellow; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
                                                             @endforeach
                                                         </div>
                                                     </div><!-- End .product-desc-content -->
