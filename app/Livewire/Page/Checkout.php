@@ -34,7 +34,13 @@ class Checkout extends Component
             "status" => 0,
             "user_id" => $this->user_id
         ]);
-        $order->products()->sync(collect($this->cart)->pluck("id"));
+        $order->products()->sync(
+            collect($this->cart)->mapWithKeys(function ($product) {
+                return [
+                    $product['id'] => ['quantity' => $product['quantity'], 'price' => $product['price']]
+                ];
+            })->toArray()
+        );
         $this->cart = [];
         Mail::to($this->form->email)->queue(new PlacedOrder(session()->get("cart")));
         session()->put("cart", $this->cart);

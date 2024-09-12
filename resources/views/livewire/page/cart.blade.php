@@ -37,7 +37,7 @@
 												<div class="product">
 													<figure class="product-media">
 														<a href="#">
-															<img src="/uploads/{{ $product["images"][0]["image"] }}" alt="Product image">
+															<img src="/storage/{{ $product["images"][0]["image"] }}" alt="Product image">
 														</a>
 													</figure>
 

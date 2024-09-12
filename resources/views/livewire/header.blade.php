@@ -60,20 +60,19 @@
             <div class="header-middle">
                 <div class="container">
                     <div class="header-left">
-                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                            <form action="#" method="get">
+                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block position-relative" x-data="{ open: false }">
+                            <form method="get">
                                 <div class="header-search-wrapper search-wrapper-wide">
                                     <label for="q" class="sr-only">Search</label>
                                     <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+                                    <input wire:model.live.debounce.500ms="search" type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
                         </div><!-- End .header-search -->
                     </div>
                     <div class="header-center">
                         <a href="index.html" class="logo">
-                            <img src="/assets/images/demos/demo-6/logo.png" alt="Molla Logo" width="82" height="20">
+                            <img src="/storage/logo/logo.jpg" alt="Molla Logo" width="82" height="20">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -102,16 +101,18 @@
 
                                                 <span class="cart-product-info">
                                                     <span class="cart-product-qty">{{ $product["quantity"] }}</span>
-                                                    x ${{ ($product["new_price"] ?? $product["price"]) }}
+                                                    x RS {{ ($product["new_price"] ?? $product["price"]) }}
                                                 </span>
                                             </div><!-- End .product-cart-details -->
 
                                             <figure class="product-image-container">
                                                 <a href="product.html" class="product-image">
-                                                    <img src="/uploads/{{ $product['images'][0]['image'] }}" alt="product">
+                                                    <img src="/storage/{{ $product['images'][0]['image'] }}" alt="product">
                                                 </a>
                                             </figure>
                                             <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["id"] }}')"><i class="icon-close"></i></a>
+
+                                            <!-- <span style="display: inline;" class="spinner-black ml-3"></span> -->
                                         </div><!-- End .product -->
                                         @endforeach
 

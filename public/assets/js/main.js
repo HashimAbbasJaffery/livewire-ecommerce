@@ -4,6 +4,21 @@ $(document).ready(function () {
 
     owlCarousels();
     quantityInputs();
+    function debounce(func, delay) {
+        let timeoutId;
+
+        return function(...args) {
+            const context = this;
+
+            // Clear the previous timeout if it exists
+            clearTimeout(timeoutId);
+
+            // Set a new timeout
+            timeoutId = setTimeout(() => {
+                func.apply(context, args);
+            }, delay);
+        };
+    }
 
     // Header Search Toggle
 
@@ -170,12 +185,12 @@ $(document).ready(function () {
 		if (priceSlider == null) return;
 
 		noUiSlider.create(priceSlider, {
-			start: [ 0, 750 ],
+			start: [ 1, 1000 ],
 			connect: true,
 			step: 1,
-			margin: 200,
+			margin: 1,
 			range: {
-				'min': 0,
+				'min': 1,
 				'max': 1000
 			},
 			tooltips: true,
@@ -186,11 +201,11 @@ $(document).ready(function () {
 		});
 
 		// Update Price Range
-		priceSlider.noUiSlider.on('update', function( values, handle ){
-			$('#filter-price-range').text(values.join(' - '));
-            console.log(values);
+		priceSlider.noUiSlider.on('update', debounce( function( values, handle ){
+          	$('#filter-price-range').text(values.join(' - '));
+
             Livewire.dispatch("price-change", values);
-		});
+		}, 500));
 	}
 
 	// Product countdown

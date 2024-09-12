@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Page\Products;
 use App\Services\Cart;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -11,6 +12,7 @@ class Header extends Component
 {
     public $cart;
     public $overallPrice;
+    public $search = "";
     public function mount() {
         $this->cart = session()->has("cart") ? session()->get("cart") : [];
         $this->overallPrice = session()->has("overallPrice") ? session()->get("overallPrice") : 0;
@@ -68,5 +70,8 @@ class Header extends Component
 
 
         $this->dispatch('removed-from-cart');
+    }
+    public function updatedSearch() {
+        $this->dispatch("search-product", $this->search)->to(Products::class);
     }
 }

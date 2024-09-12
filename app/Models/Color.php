@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Color extends Model
 {
     use HasFactory;
-
+    protected $guarded = ["id", "created_at", "updated_at"];
     public function images() {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Image::class, "color");
     }
+
+    protected $attributes = [
+        "status" => true
+    ];
 
 }

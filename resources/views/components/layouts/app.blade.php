@@ -13,11 +13,11 @@
     <meta name="author" content="p-themes">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/storage/logo/logo.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/storage/logo/logo.jpg">
     <link rel="manifest" href="/assets/images/icons/site.html">
     <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
-    <link rel="shortcut icon" href="/assets/images/icons/favicon.ico">
+    <link rel="shortcut icon" href="/storage/logo/logo.jpg">
     <meta name="apple-mobile-web-app-title" content="Molla">
     <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
@@ -33,10 +33,10 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/skins/skin-demo-6.css">
     <link rel="stylesheet" href="/assets/css/demos/demo-6.css">
+    @livewireScripts
 
     <link rel="stylesheet" href="assets/css/plugins/magnific-popup/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/plugins/nouislider/nouislider.css">
-    <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script src="https://kit.fontawesome.com/3a7e8b6e65.js" crossorigin="anonymous"></script>
 
@@ -44,12 +44,103 @@
 html {
     scroll-behavior: smooth;
 }
+.spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: conic-gradient(#0000 10%,#ffffff);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3.8px),#000 0);
+    animation: spinner-zp9dbg 1s infinite linear;
+ }
+
+ @keyframes spinner-zp9dbg {
+    to {
+       transform: rotate(1turn);
+    }
+ }
+
+
+.spinner-black {
+   width: 18px;
+   height: 18px;
+   border-radius: 50%;
+   background: conic-gradient(#0000 10%,#000000);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3.8px),#000 0);
+   animation: spinner-zp9dbg 1s infinite linear;
+}
+
+@keyframes spinner-zp9dbg {
+   to {
+      transform: rotate(1turn);
+   }
+}
+
+.spinner-big {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   border: 9px solid #000000;
+   animation: spinner-bulqg1 0.8s infinite linear alternate,
+        spinner-oaa3wk 1.6s infinite linear;
+}
+
+@keyframes spinner-bulqg1 {
+   0% {
+      clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+   }
+
+   12.5% {
+      clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%);
+   }
+
+   25% {
+      clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%);
+   }
+
+   50% {
+      clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+   }
+
+   62.5% {
+      clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+   }
+
+   75% {
+      clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%);
+   }
+
+   100% {
+      clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%);
+   }
+}
+
+@keyframes spinner-oaa3wk {
+   0% {
+      transform: scaleY(1) rotate(0deg);
+   }
+
+   49.99% {
+      transform: scaleY(1) rotate(135deg);
+   }
+
+   50% {
+      transform: scaleY(-1) rotate(0deg);
+   }
+
+   100% {
+      transform: scaleY(-1) rotate(-135deg);
+   }
+}
+
+.btn-product:disabled {
+    cursor: not-allowed;
+}
 </style>
     @livewireStyles
 </head>
 
 <body>
-    <div class="page-wrapper" x-data>
+    <div class="page-wrapper">
         <livewire:header></livewire:header>
 
         {{ $slot }}
@@ -375,7 +466,6 @@ html {
         </div>
     </div>
     <!-- Plugins JS File -->
-    @livewireScripts
     <script type="module">
         Livewire.on("added-to-cart", function() {
             const toast = new Notyf();

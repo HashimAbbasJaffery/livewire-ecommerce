@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Order;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
@@ -22,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public static $filamentUserColumn = 'is_admin';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,5 +51,12 @@ class User extends Authenticatable
 
     public function orders() {
         return $this->hasMany(Order::class);
+    }
+    public function canAccessPanel(\Filament\Panel $panel): bool {
+        return $this->is_admin;
+    }
+    public function canAccessFilament(): bool {
+        return $this->is_admin;
+
     }
 }

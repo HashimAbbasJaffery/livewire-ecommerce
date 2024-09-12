@@ -11,6 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $with = ["images"];
+    protected $guarded = ["id", "created_at", "updated_at"];
     public function images() {
         return $this->hasMany(Image::class);
     }
@@ -29,7 +30,7 @@ class Product extends Model
         }
         $query->when($filters["colors"] ?? null, function($query) use ($filters) {
             $query->whereHas("images", function($query) use ($filters) {
-                $query->whereIn("images.color_id", $filters["colors"]);
+                $query->whereIn("images.color", $filters["colors"]);
             });
         });
     }

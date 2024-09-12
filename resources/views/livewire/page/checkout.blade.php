@@ -23,7 +23,7 @@
             					<label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
             				</form>
             			</div> -->
-            			<form wire:submit.prevent="createOrder">
+            			<form wire:submit.prevent="createOrder" wire:target="createOrder" wire:loading.attr="disabled">
 		                	<div class="row">
 		                		<div class="col-lg-9">
 		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
@@ -82,7 +82,10 @@
 
 	                					<label>Order notes (optional)</label>
 	        							<textarea wire:model.blur="form.order_notes" class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-		                		</div><!-- End .col-lg-9 -->
+                                        <button wire:target="createOrder" type="submit" wire:loading.attr="disabled" class="btn btn-outline-primary-2">
+		                					Place Order <div wire:loading wire:target="createOrder" class="spinner-black ml-3"></div>
+		                				</button>
+                                </div><!-- End .col-lg-9 -->
 		                		<aside class="col-lg-3">
 		                			<div class="summary">
 		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->

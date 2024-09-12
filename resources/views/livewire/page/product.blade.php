@@ -32,7 +32,7 @@
                                     @endif
                                     @foreach($product->images as $image)
                                         <figure class="product-separated-item">
-                                            <img src="/uploads/{{ $image->image }}" data-zoom-image="assets/images/products/single/sticky/1-big.jpg" alt="product image">
+                                            <img src="/storage/{{ $image->image }}" data-zoom-image="assets/images/products/single/sticky/1-big.jpg" alt="product image">
                                         </figure>
                                     @endforeach
 
@@ -124,10 +124,10 @@
                                                     <div class="product-desc-content">
                                                         {!! $product->extra_description !!}
 
-                                                        <h3>Variants</h3>
+                                                        <h3 class="mt-3">Variants</h3>
                                                         <div style="display: flex;">
                                                             @foreach ($product->images as $image)
-                                                                <img wire:click="changeSelected('{{ $image->image }}')" src="/uploads/{{ $image->image }}" style="@if($selected === $image->image) border: 1px solid yellow; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
+                                                                <img wire:click="changeSelected('{{ $image->image }}')" src="/storage/{{ $image->image }}" style="@if($selected === $image->image) border: 1px solid yellow; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
                                                             @endforeach
                                                         </div>
                                                     </div><!-- End .product-desc-content -->
