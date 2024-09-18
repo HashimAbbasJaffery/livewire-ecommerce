@@ -21,6 +21,9 @@ class Product extends Model
     public function categories() {
         return $this->belongsToMany(Category::class);
     }
+    public function wishlists() {
+        return $this->BelongsToMany(User::class, "wishlist");
+    }
 
     public function scopeFilter(Builder $query, $filters) {
         if($filters["categories"]) {

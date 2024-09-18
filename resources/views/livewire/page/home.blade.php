@@ -11,19 +11,20 @@
 
     <div class="tab-content tab-content-carousel">
         <div class="tab-pane p-0 fade show active" id="trending-all-tab" role="tabpanel" aria-labelledby="trending-all-link">
-            <div class="col-6 col-md-4 col-lg-3">
-
+            <div class="row justify-content-center">
                 @foreach($products as $product)
-                    <livewire:product :product="$product"></livewire:product>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <livewire:product :product="$product"></livewire:product>
+                    </div><!-- End .owl-carousel -->
                 @endforeach
-            </div><!-- End .owl-carousel -->
+            </div>
         </div><!-- .End .tab-pane -->
     </div><!-- End .tab-content -->
 </div><!-- End .container -->
 
 <div class="mb-5"></div><!-- End .mb-5 -->
 
-<livewire:deal></livewire:deal>
+<livewire:deal :$deals></livewire:deal>
 
 
 <div class="mb-6"></div><!-- End .mb-5 -->

@@ -18,6 +18,7 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var array<int, string>
      */
+    protected $with = ["wishlists"];
     protected $fillable = [
         'name',
         'email',
@@ -57,6 +58,8 @@ class User extends Authenticatable implements FilamentUser
     }
     public function canAccessFilament(): bool {
         return $this->is_admin;
-
+    }
+    public function wishlists() {
+        return $this->belongsToMany(Product::class, "wishlist");
     }
 }

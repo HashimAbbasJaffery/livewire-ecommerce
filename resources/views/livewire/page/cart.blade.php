@@ -37,7 +37,7 @@
 												<div class="product">
 													<figure class="product-media">
 														<a href="#">
-															<img src="/storage/{{ $product["images"][0]["image"] }}" alt="Product image">
+															<img src="/storage/{{ $product["images"][0]["image"] ?? 'dummy.jpg'}}" alt="Product image">
 														</a>
 													</figure>
 
@@ -73,23 +73,38 @@
                                             @php
                                                 $total_price = (new \App\Services\Cart())->totalPrice($cart);
                                             @endphp
+
+                                            @foreach($cart as $product)
+                                                    <tr>
+                                                        <td><a href="#">{{ $product["title"] }}</a></td>
+                                                        @php
+                                                            $unit_price = $product["new_price"] ?? $product["price"];
+                                                            $quantity = $product["quantity"];
+                                                            $total = $unit_price * $quantity;
+                                                        @endphp
+                                                        <td>PKR {{ $unit_price }} x {{ $quantity }}</td>
+                                                    </tr>
+                                                @endforeach
 	                						<tr class="summary-total">
 	                							<td>Subtotal:</td>
 	                							<td>PKR {{ $total_price }}</td>
 	                						</tr><!-- End .summary-subtotal -->
-                                            <p></p>
+                                            <tr>
+                                                <td>Shipping</td>
+                                                <td>PKR 250</td>
+                                            </tr>
 	                						<tr class="summary-total">
 	                							<td>Total:</td>
-	                							<td>PKR {{ $total_price }}</td>
+	                							<td>PKR {{ $total_price + 250 }}</td>
 	                						</tr><!-- End .summary-total -->
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->
 
-	                				<a href="checkout.html" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+	                				<a href="{{ route('checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
 
 	                			</div><!-- End .summary -->
 
-		            			<a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+		            			<a href="{{ route('products') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
 	                		</aside><!-- End .col-lg-3 -->
 	                	</div><!-- End .row -->
 	                </div><!-- End .container -->

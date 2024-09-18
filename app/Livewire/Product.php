@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use App\Services\Wishlist;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Product as Prod;
 use App\Livewire\Header;
@@ -11,11 +14,13 @@ class Product extends Component
     public Prod $product;
     public $thumbnail;
     public $images;
+    public bool $is_wishlist;
     public function mount(Prod $product) {
         $this->product = $product;
         $image = ($product->images()->first())?->image ?? null;
         $this->images = $product->images()->limit(4)->get();
         $this->thumbnail = $image;
+        $this->is_wishlist = $product->wishlists()?->find(auth()->user()?->id ?? null)?->exists() ?? false;
 
     }
     public function render()
@@ -29,10 +34,20 @@ class Product extends Component
     }
 
     public function addToCart($item) {
-        // Dispatching To Livewire Component
         $this->dispatch('add-to-cart', $item)->to(Header::class);
+    }
+    #[On("wishlist-item")]
+    public function wishlist($id, Wishlist $wishlist) {
+        $events = $wishlist->wishlist($this->is_wishlist, $id);
 
-        // Dispatching to the browser
+        foreach($events as $event => $value) {
+            if($value) {
+                $this->dispatch($event, $value["data"])->to($value["class"]);
+            } else {
+                $this->dispatch($event);
+            }
+        }
 
+        $this->is_wishlist = ! $this->is_wishlist;
     }
 }

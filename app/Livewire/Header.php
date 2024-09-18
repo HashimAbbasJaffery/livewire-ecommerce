@@ -3,27 +3,55 @@
 namespace App\Livewire;
 
 use App\Livewire\Page\Products;
+use App\Models\Product;
+use App\Models\User;
 use App\Services\Cart;
+use Auth;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 
 class Header extends Component
 {
+    use WithPagination;
     public $cart;
     public $overallPrice;
     public $search = "";
+    public $perPage = 8;
+    public $total_wishlists;
     public function mount() {
         $this->cart = session()->has("cart") ? session()->get("cart") : [];
         $this->overallPrice = session()->has("overallPrice") ? session()->get("overallPrice") : 0;
+        $this->total_wishlists = (User::find(auth()->user()?->id ?? null))?->wishlists()->count() ?? 0;
     }
     public function render()
     {
-        return view('livewire.header');
+        if($this->search) {
+            $products = Product::where("title", "like", "%" . $this->search . "%")->paginate($this->perPage);
+        } else {
+            $products = [];
+            $this->perPage = 8;
+        }
+
+        $total_wishlists = $this->total_wishlists;
+        return view('livewire.header', compact("products", "total_wishlists"));
+    }
+
+    #[On('wishlist')]
+    public function addToWishlist($status) {
+        if($status === "attach") {
+            $this->total_wishlists++;
+        } else {
+            $this->total_wishlists--;
+        }
     }
     #[On('update-quantity')]
     public function changeQuantity($cart) {
         $this->cart = $cart;
+    }
+    public function loadMore() {
+        $this->perPage += 8;
     }
     protected function smushDuplicateAndPush(array $item, int $quantity) {
         $flag = false;
@@ -72,6 +100,7 @@ class Header extends Component
         $this->dispatch('removed-from-cart');
     }
     public function updatedSearch() {
-        $this->dispatch("search-product", $this->search)->to(Products::class);
+        $this->perPage = 8;
     }
+
 }

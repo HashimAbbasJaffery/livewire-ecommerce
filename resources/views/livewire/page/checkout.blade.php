@@ -23,7 +23,7 @@
             					<label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
             				</form>
             			</div> -->
-            			<form wire:submit.prevent="createOrder" wire:target="createOrder" wire:loading.attr="disabled">
+            			<form wire:submit.prevent="save" wire:target="save" wire:loading.attr="disabled">
 		                	<div class="row">
 		                		<div class="col-lg-9">
 		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
@@ -53,12 +53,42 @@
                                         <div class="text-danger">@error('form.apartment') {{ $message }} @enderror</div>
 	            						<input type="text" wire:model.blur="form.apartment" class="form-control @error('form.apartment') border border-danger @enderror" placeholder="Appartments, suite, unit etc ..." required>
 
-	            						<div class="row">
-		                					<div class="col-sm-6">
+                                       <div class="row">
+		                					<div class="col-sm-6 mb-3 rounded" style="border: 1px solid #666; padding: 10px; height: 350px; overflow-x:auto;">
 		                						<label>Town / City *</label>
                                                 <div class="text-danger">@error('form.city') {{ $message }} @enderror</div>
-	            				                <input wire:model.blur="form.city" type="text" class="form-control @error('form.city') border border-danger @enderror" required>
-		                					</div><!-- End .col-sm-6 -->
+	            				                <!-- <input wire:model.blur="form.city" type="text" class="form-control @error('form.city') border border-danger @enderror" required> -->
+                                                <div class="cities"
+                                                    x-data="{
+                                                        items: @entangle('cities'),
+                                                        search: '',
+                                                        get filteredCities() {
+                                                            return this.items.filter(item => item.operationalCityName.toLowerCase().includes(this.search.toLowerCase()))
+                                                        }
+                                                    }"
+                                                >
+                                                <input x-model="search" type="text" class="form-control @error('form.city') border border-danger @enderror" required>
+                                                    <template x-for="(city, index) in filteredCities">
+                                                        <div class="city mb-2 d-flex justify-content-between align-items-center">
+                                                            <p x-text="city.operationalCityName"></p>
+                                                            <button
+                                                                wire:loading.remove
+                                                                wire:click="changeCity(city)"
+                                                                wire:target="$wire.changeCity(city)"
+                                                                type="button"
+                                                                class="rounded btn btn-secondary"
+                                                                x-text="$wire.form.city === city.operationalCityName ? 'Selected' : 'Select'"
+                                                            >
+                                                            </button>
+                                                            <button wire:loading wire:target="$wire.changeCity(city)" class="rounded btn btn-secondary">
+                                                                <div class="spinner-container">
+                                                                    <div class="spinner-white"></div>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
 
                                             <div class="col-sm-6">
 		                						<label>Email address *</label>
@@ -82,8 +112,8 @@
 
 	                					<label>Order notes (optional)</label>
 	        							<textarea wire:model.blur="form.order_notes" class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-                                        <button wire:target="createOrder" type="submit" wire:loading.attr="disabled" class="btn btn-outline-primary-2">
-		                					Place Order <div wire:loading wire:target="createOrder" class="spinner-black ml-3"></div>
+                                        <button wire:target="save" type="submit" wire:loading.attr="disabled" class="btn btn-outline-primary-2">
+		                					Place Order <div wire:loading wire:target="save" class="spinner-black ml-3"></div>
 		                				</button>
                                 </div><!-- End .col-lg-9 -->
 		                		<aside class="col-lg-3">
@@ -110,13 +140,17 @@
                                                         <td>PKR {{ $unit_price }} x {{ $quantity }}</td>
                                                     </tr>
                                                 @endforeach
-		                						<tr class="summary-subtotal">
+                                                <tr class="summary-subtotal">
 		                							<td>Subtotal:</td>
 		                							<td>PKR {{ (new \App\Services\Cart())->totalPrice($cart) }}</td>
 		                						</tr><!-- End .summary-subtotal -->
+                                                <tr>
+                                                    <td>Shipping</td>
+                                                    <td>PKR 250</td>
+                                                </tr>
 		                						<tr class="summary-total">
 		                							<td>Total:</td>
-		                							<td>PKR {{ (new \App\Services\Cart())->totalPrice($cart) }}</td>
+		                							<td>PKR {{ (new \App\Services\Cart())->totalPrice($cart) + 250 }}</td>
 		                						</tr><!-- End .summary-total -->
 		                					</tbody>
 		                				</table><!-- End .table table-summary -->

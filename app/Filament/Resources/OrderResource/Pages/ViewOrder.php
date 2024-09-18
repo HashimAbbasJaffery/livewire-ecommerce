@@ -52,6 +52,26 @@ class ViewOrder extends ViewRecord
                         ->getStateUsing(function($record) {
                             return $record->images()?->first()?->image ?? null;
                         })
+                ]),
+
+            Section::make("Payment details")
+                ->schema([
+                    TextEntry::make("Subtotal")
+                        ->getStateUsing(function($record) {
+                            $total = 0;
+                            foreach($record->products as $product) {
+                                $total += $product->pivot->price * $product->pivot->quantity;
+                            }
+                            return $total . " RS";
+                        }),
+                    TextEntry::make("Total")
+                        ->getStateUsing(function($record) {
+                            $total = 0;
+                            foreach($record->products as $product) {
+                                $total += $product->pivot->price * $product->pivot->quantity;
+                            }
+                            return $total . " RS";
+                        })
                 ])
         ]);
     }

@@ -1,11 +1,13 @@
 <?php
 
+use App\Courier\PostEx;
 use App\Http\Controllers\ProfileController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/test", function() {
-    auth()->logout();
+    $postex = (new PostEx(env("COURIER_POSTEX")))->getCities()["dist"];
+    dd($postex);
 });
 
 Route::get('/', \App\Livewire\Page\Home::class)->name("home");
@@ -13,6 +15,7 @@ Route::get('/', \App\Livewire\Page\Home::class)->name("home");
 
 Route::get("/product/{product}", \App\Livewire\Page\Product::class)->name("product");
 Route::get("/products", \App\Livewire\Page\Products::class)->name("products");
+Route::get("/wishlists", \App\Livewire\Page\Wishlist::class)->name("wishlists");
 Route::get("/cart", \App\Livewire\Page\Cart::class)->name("cart");
 Route::get("/checkout", \App\Livewire\Page\Checkout::class)->name("checkout");
 Route::get("/ordered", \App\Livewire\OrderProduct::class)->name("ordered");

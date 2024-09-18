@@ -68,20 +68,44 @@
                                     <input wire:model.live.debounce.500ms="search" type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
+                            @if($products && count($products) > 0)
+                                <div class="suggestions position-absolute p-3 bg-light border border-black w-100" style="max-height: 250px; z-index: 999999; overflow-x: auto;">
+                                    @foreach($products as $product)
+                                        <a href="{{ route('product', [ 'product' => $product->id ]) }}">
+                                            <div class="product d-flex">
+                                                <div class="product-img" style="width: 20%;">
+                                                    <img src="/storage/{{ $product->images[0]?->image ?? 'dummy.jpg' }}" alt="">
+                                                </div>
+                                                <div class="product-detail ml-3 d-flex flex-column" style="justify-content: space-between; width: 70%;">
+                                                    <p>{{ $product->title }} <br> <span style="font-size: 11px; padding-top: 10px;">{{ $product->categories[0]?->category ?? "Not assigned" }}</span></p>
+                                                    <p style="font-size: 14px; color: #c96;">{{ $product->price }}RS</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                    @if(count($products) < $products->total())
+                                        <p wire:click="loadMore" style="background: #c96; color: white; text-align: center; cursor:pointer;" class="p-3">
+                                            Load More
+                                        </p>
+                                    @endif
+                                </div>
+                            @endif
                         </div><!-- End .header-search -->
                     </div>
                     <div class="header-center">
-                        <a href="index.html" class="logo">
+                        <a href="{{ route('home') }}" class="logo">
                             <img src="/storage/logo/logo.jpg" alt="Molla Logo" width="82" height="20">
                         </a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
-                        <a href="wishlist.html" class="wishlist-link">
-                            <i class="icon-heart-o"></i>
-                            <span class="wishlist-count">3</span>
-                            <span class="wishlist-txt">My Wishlist</span>
-                        </a>
+                        @auth
+                            <a href="{{ route("wishlists") }}" class="wishlist-link">
+                                <i class="icon-heart-o"></i>
+                                <span class="wishlist-count">{{ $total_wishlists }}</span>
+                                <span class="wishlist-txt">My Wishlist</span>
+                            </a>
+                        @endauth
 
                         <div class="dropdown cart-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -107,7 +131,7 @@
 
                                             <figure class="product-image-container">
                                                 <a href="product.html" class="product-image">
-                                                    <img src="/storage/{{ $product['images'][0]['image'] }}" alt="product">
+                                                    <img src="/storage/{{ $product["images"] ? $product['images'][0]['image'] : "dummy.jpg" }}" alt="product">
                                                 </a>
                                             </figure>
                                             <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["id"] }}')"><i class="icon-close"></i></a>

@@ -98,6 +98,7 @@ return [
     'cipher' => 'AES-256-CBC',
 
     'key' => env('APP_KEY'),
+    'postex_key' => env("COURIER_POSTEX"),
 
     'previous_keys' => [
         ...array_filter(

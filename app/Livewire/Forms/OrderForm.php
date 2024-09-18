@@ -19,7 +19,7 @@ class OrderForm extends Form
     #[Validate('required|min:3')]
     public $apartment;
 
-    #[Validate('required|min:3')]
+    #[Validate('required')]
     public $city;
 
     #[Validate('required|email')]

@@ -70,7 +70,8 @@
                                         <a href="#" class="btn-product btn-cart" wire:click="addToCart()"><span>add to cart</span></a>
 
                                         <div class="details-action-wrapper">
-                                            <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                            <a wire:loading.remove wire:target="" wire:target="addToWishlist({{ $product->id }})" wire:click="addToWishlist({{ $product->id }})" class="btn-product btn-wishlist" title="Wishlist"><span>{{ $is_wishlist ? "Remove From Wishlist" : "Add To Wishlist" }}</span></a>
+                                            <div wire:loading wire:target="addToWishlist({{ $product->id }})" class="spinner-black ml-3"></div>
                                         </div><!-- End .details-action-wrapper -->
                                     </div><!-- End .product-details-action -->
 
@@ -126,8 +127,8 @@
 
                                                         <h3 class="mt-3">Variants</h3>
                                                         <div style="display: flex;">
-                                                            @foreach ($product->images as $image)
-                                                                <img wire:click="changeSelected('{{ $image->image }}')" src="/storage/{{ $image->image }}" style="@if($selected === $image->image) border: 1px solid yellow; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
+                                                            @foreach ($images as $image)
+                                                                <img wire:click="changeSelected('{{ $image->image }}')" src="/storage/{{ $image->image }}" style="@if($selected === $image->image) border: 1px solid #666; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
                                                             @endforeach
                                                         </div>
                                                     </div><!-- End .product-desc-content -->

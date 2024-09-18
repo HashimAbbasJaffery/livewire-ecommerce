@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/skins/skin-demo-6.css">
     <link rel="stylesheet" href="/assets/css/demos/demo-6.css">
-    @livewireScripts
 
     <link rel="stylesheet" href="assets/css/plugins/magnific-popup/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/plugins/nouislider/nouislider.css">
@@ -65,6 +64,15 @@ html {
    height: 18px;
    border-radius: 50%;
    background: conic-gradient(#0000 10%,#000000);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3.8px),#000 0);
+   animation: spinner-zp9dbg 1s infinite linear;
+}
+
+.spinner-white {
+   width: 18px;
+   height: 18px;
+   border-radius: 50%;
+   background: conic-gradient(#0000 10%,#ffffff);
    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3.8px),#000 0);
    animation: spinner-zp9dbg 1s infinite linear;
 }
@@ -492,7 +500,19 @@ html {
             const toast = new Notyf();
             toast.success({message: "Welcome Back, {{ auth()->user()?->name ?? "none" }}", dismissible: true, duration: 4000});
         })
+
+        Livewire.on("wishlisted", function() {
+            const toast = new Notyf();
+            toast.success({message: "Added in wishlist", dismissible: true, duration: 4000});
+        })
+
+        Livewire.on("remove-wishlist", function() {
+            const toast = new Notyf();
+            toast.success({message: "Removed from Wishlist", dismissible: true, duration: 4000});
+        })
     </script>
+        @livewireScripts
+
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
