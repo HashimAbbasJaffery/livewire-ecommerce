@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/test", function() {
-    $postex = (new PostEx(env("COURIER_POSTEX")))->getCities()["dist"];
+    $postex = (new PostEx(env("COURIER_POSTEX")))->track("2005573000010/");
     dd($postex);
 });
 
@@ -19,6 +19,7 @@ Route::get("/wishlists", \App\Livewire\Page\Wishlist::class)->name("wishlists");
 Route::get("/cart", \App\Livewire\Page\Cart::class)->name("cart");
 Route::get("/checkout", \App\Livewire\Page\Checkout::class)->name("checkout");
 Route::get("/ordered", \App\Livewire\OrderProduct::class)->name("ordered");
+Route::get("/track", App\Livewire\Page\Track::class)->name("track");
 
 Route::get('/dashboard', function () {
     return view('dashboard');

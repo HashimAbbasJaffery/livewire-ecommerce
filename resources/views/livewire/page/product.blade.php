@@ -126,10 +126,10 @@
                                                         {!! $product->extra_description !!}
 
                                                         <h3 class="mt-3">Variants</h3>
-                                                        <div style="display: flex;">
-                                                            @foreach ($images as $image)
-                                                                <img wire:click="changeSelected('{{ $image->image }}')" src="/storage/{{ $image->image }}" style="@if($selected === $image->image) border: 1px solid #666; @endif height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
-                                                            @endforeach
+                                                        <div style="display: flex;" x-data="{ selected: $wire.selected, images: $wire.images, init() { console.log(this.images) } }">
+                                                            <template x-for="image in images">
+                                                                <img x-on:click="selected = image.image" wire:click="changeSelected(image.image)" :src="`/storage/${image.image}`" :class="selected === image.image ? 'selected-image' : ''" style="height: 70px; border-radius: 10px; margin: 3px; padding: 3px; cursor: pointer; cursor: pointer;" alt="">
+                                                            </template>
                                                         </div>
                                                     </div><!-- End .product-desc-content -->
                                                 </div><!-- End .card-body -->

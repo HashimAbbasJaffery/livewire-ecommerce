@@ -33,7 +33,7 @@
                             RS {{ $product->price }}
                         </div><!-- End .product-price -->
 
-                        <div class="product-nav product-nav-thumbs">
+                        <div class="product-nav product-nav-thumbs" wire:ignore>
                             @foreach($images as $image)
                             <a wire:key="image-{{ $image->id }}" @class(['active' => $thumbnail === $image->image]) stye="cursor: pointer;">
                                 <img wire:click="changeThumbnail('{{ $image->image }}')" src="/storage/{{ $image->image }}" alt="product desc">

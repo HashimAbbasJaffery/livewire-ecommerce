@@ -19,15 +19,15 @@ class Product extends Component
         $this->product = $product;
         $this->selected = $product->images[0]->image;
         $this->is_wishlist = $product->wishlists()?->find(auth()->user()?->id ?? null)?->exists() ?? false;
+        $this->images = $this->product->images->toArray();
     }
     public function render()
     {
         $product = $this->product;
-        $images = $this->product->images->sortBy(fn($image) => $image->image !== $this->selected->images);
         return view('livewire.page.product', compact("product"));
     }
     public function addToCart() {
-        $this->dispatch("add-to-cart", [ "item" => $this->product, "quantity" => $this->quantity ])->to(Header::class);
+        $this->dispatch("add-to-cart", [ "item" => $this->product, "quantity" => $this->quantity, "variant" => $this->selected])->to(Header::class);
     }
     public function changeSelected($image) {
         $this->selected = $image;

@@ -143,16 +143,21 @@ html {
 .btn-product:disabled {
     cursor: not-allowed;
 }
+
+.selected-image {
+    border: 1px solid #666;
+}
 </style>
     @livewireStyles
 </head>
 
-<body>
+<body style="position: relative;">
+    <a href="https://wa.me/+923002862366" target="_blank">
+        <img src="/images/whatsapp.png" width="50" style="position: fixed; z-index: 2; bottom: 10px; right: 10px; cursor: pointer;">
+    </a>
     <div class="page-wrapper">
         <livewire:header></livewire:header>
-
-        {{ $slot }}
-
+            {{ $slot }}
         <livewire:footer></livewire:footer>
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>

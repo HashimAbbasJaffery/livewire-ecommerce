@@ -6,6 +6,7 @@ use App\Courier\PostEx;
 use App\Livewire\Forms\OrderForm;
 use App\Mail\PlacedOrder;
 use App\OrderStatus;
+use DB;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Mail;
@@ -34,22 +35,31 @@ class Checkout extends Component
     public function save() {
         $validated = $this->validate();
         abort_if(!session()->get("cart"), 403);
-        $order = \App\Models\Order::create([
-            ...$this->form->toArray(),
-            "status" => 0,
-            "user_id" => $this->user_id
-        ]);
-        $order->products()->sync(
-            collect($this->cart)->mapWithKeys(function ($product) {
-                return [
-                    $product['id'] => ['quantity' => $product['quantity'], 'price' => $product['price']]
-                ];
-            })->toArray()
-        );
+        $order = "";
+
+        DB::transaction(function() {
+            $order = \App\Models\Order::create([
+                ...$this->form->toArray(),
+                "status" => 0,
+                "user_id" => $this->user_id
+            ]);
+            $order->products()->sync(
+                collect($this->cart)->mapWithKeys(function ($product) {
+                    return [
+                        $product['id'] => [
+                            'quantity' => $product['quantity'],
+                            'price' => $product["new_price"] ?? $product['price'],
+                            "variant" => $product["variant"]
+                        ]
+                    ];
+                })->toArray()
+            );
+        });
+
         $this->cart = [];
         Mail::to($this->form->email)->queue(new PlacedOrder(session()->get("cart")));
         session()->put("cart", $this->cart);
-        return redirect()->to(route("ordered"));
+        return redirect()->to(route("ordered", ));
     }
     public function changeCity(array $city) {
         $this->form->city = $city["operationalCityName"];

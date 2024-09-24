@@ -24,8 +24,10 @@ class Cart
     }
     public function removeFromCart($cart, $id) {
         $remaining_items = array_filter($cart, function($inCartItem) use ($id){
-            return $inCartItem["id"] != (int)$id;
+            return $inCartItem["variant"] != $id;
         });
+
+
 
         return [$remaining_items, $this->totalPrice($remaining_items)];
     }

@@ -32,12 +32,12 @@
 									</thead>
                                   	<tbody>
                                         @foreach($cart as $key => $product)
-                                       <tr wire:key="{{ $product['id'] }}">
+                                       <tr wire:key="{{ $product['variant'] }}">
 											<td class="product-col">
 												<div class="product">
 													<figure class="product-media">
 														<a href="#">
-															<img src="/storage/{{ $product["images"][0]["image"] ?? 'dummy.jpg'}}" alt="Product image">
+															<img src="/storage/{{ $product["variant"] ? $product["variant"] : $product["images"][0]["image"]}}" alt="Product image">
 														</a>
 													</figure>
 
@@ -53,7 +53,7 @@
                                                 </div><!-- End .cart-product-quantity -->
                                             </td>
 											<td class="total-col">PKR {{ ($product["new_price"] ?? $product["price"]) * $product["quantity"] }}</td>
-											<td wire:click="removeFromCart('{{ $product['id'] }}')" class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
+											<td wire:click="removeFromCart('{{ $product['variant'] }}')" class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
 										</tr>
                                     @endforeach
                               		</tbody>

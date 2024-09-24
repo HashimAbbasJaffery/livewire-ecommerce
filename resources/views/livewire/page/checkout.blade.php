@@ -62,9 +62,11 @@
                                                     x-data="{
                                                         items: @entangle('cities'),
                                                         search: '',
+														selectedCity: '',
                                                         get filteredCities() {
                                                             return this.items.filter(item => item.operationalCityName.toLowerCase().includes(this.search.toLowerCase()))
                                                         }
+
                                                     }"
                                                 >
                                                 <input x-model="search" type="text" class="form-control @error('form.city') border border-danger @enderror" required>
@@ -72,18 +74,13 @@
                                                         <div class="city mb-2 d-flex justify-content-between align-items-center">
                                                             <p x-text="city.operationalCityName"></p>
                                                             <button
-                                                                wire:loading.remove
                                                                 wire:click="changeCity(city)"
-                                                                wire:target="$wire.changeCity(city)"
-                                                                type="button"
+																x-on:click="selectedCity = city.operationalCityName"
+																type="button"
                                                                 class="rounded btn btn-secondary"
-                                                                x-text="$wire.form.city === city.operationalCityName ? 'Selected' : 'Select'"
+																:disabled="selectedCity === city.operationalCityName"
+                                                                x-text="selectedCity === city.operationalCityName ? 'Selected' : 'Select'"
                                                             >
-                                                            </button>
-                                                            <button wire:loading wire:target="$wire.changeCity(city)" class="rounded btn btn-secondary">
-                                                                <div class="spinner-container">
-                                                                    <div class="spinner-white"></div>
-                                                                </div>
                                                             </button>
                                                         </div>
                                                     </template>

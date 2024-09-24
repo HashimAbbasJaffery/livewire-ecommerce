@@ -34,7 +34,7 @@ class Product extends Component
     }
 
     public function addToCart($item) {
-        $this->dispatch('add-to-cart', $item)->to(Header::class);
+        $this->dispatch('add-to-cart', ["item" => $item, "quantity" => 1, "variant" => $this->thumbnail])->to(Header::class);
     }
     #[On("wishlist-item")]
     public function wishlist($id, Wishlist $wishlist) {

@@ -11,6 +11,9 @@ class OrderProduct extends Component
     }
     public function render()
     {
+        if(!session()->has("tracking_number")) {
+            abort(403);
+        }
         return view('livewire.order-product');
     }
 }

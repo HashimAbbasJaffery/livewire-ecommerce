@@ -60,16 +60,19 @@
             <div class="header-middle">
                 <div class="container">
                     <div class="header-left">
-                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block position-relative" x-data="{ open: false }">
-                            <form method="get">
+                        <div x-data="{ search: ''  }" class="header-search header-search-extended header-search-visible d-none d-lg-block position-relative" x-data="{ open: false }">
+                          <form method="get">
                                 <div class="header-search-wrapper search-wrapper-wide">
                                     <label for="q" class="sr-only">Search</label>
                                     <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input wire:model.live.debounce.500ms="search" type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+                                    <input x-model="search" wire:model.live.debounce.500ms="search" type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
+                            <div x-if="search.length > 0" wire:loading wire:target="search" class="suggestions position-absolute p-3 bg-light border border-black w-100">
+                                <div class="spinner-black mx-auto"></div>
+                            </div>
                             @if($products && count($products) > 0)
-                                <div class="suggestions position-absolute p-3 bg-light border border-black w-100" style="max-height: 250px; z-index: 999999; overflow-x: auto;">
+                                <div wire:loading.remove wire:target="search" class="suggestions position-absolute p-3 bg-light border border-black w-100" style="max-height: 250px; z-index: 999999; overflow-x: auto;">
                                     @foreach($products as $product)
                                         <a href="{{ route('product', [ 'product' => $product->id ]) }}">
                                             <div class="product d-flex">
@@ -131,10 +134,10 @@
 
                                             <figure class="product-image-container">
                                                 <a href="product.html" class="product-image">
-                                                    <img src="/storage/{{ $product["images"] ? $product['images'][0]['image'] : "dummy.jpg" }}" alt="product">
+                                                    <img src="/storage/{{ $product["variant"] ? $product["variant"] : $product['images'][0]['image'] }}" alt="product">
                                                 </a>
                                             </figure>
-                                            <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["id"] }}')"><i class="icon-close"></i></a>
+                                            <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["variant"] }}')"><i class="icon-close"></i></a>
 
                                             <!-- <span style="display: inline;" class="spinner-black ml-3"></span> -->
                                         </div><!-- End .product -->
@@ -172,7 +175,7 @@
                                     <a href="{{ route("products") }}">Shop</a>
                                 </li>
                                 <li @class(["active" => request()->routeIs("track")])>
-                                    <a href="{{ route("products") }}">Track</a>
+                                    <a href="{{ route("track") }}">Track</a>
                                 </li>
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->

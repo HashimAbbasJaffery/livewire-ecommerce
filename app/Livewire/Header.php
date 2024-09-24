@@ -55,8 +55,18 @@ class Header extends Component
     }
     protected function smushDuplicateAndPush(array $item, int $quantity) {
         $flag = false;
+
+        // ID based smushing
+
+        // foreach($this->cart as &$inCartItem) {
+        //     if(($item["id"] === $inCartItem["id"])) {
+        //         $flag = true;
+        //         $inCartItem["quantity"] += $quantity;
+        //     }
+        // }
+
         foreach($this->cart as &$inCartItem) {
-            if($item["id"] === $inCartItem["id"]) {
+            if($item["variant"] === $inCartItem["variant"]) {
                 $flag = true;
                 $inCartItem["quantity"] += $quantity;
             }
@@ -71,9 +81,11 @@ class Header extends Component
     public function addToCart($item, $quantity = 1) {
         if(isset($item["item"])) {
             $quantity = $item["quantity"];
+            $variant = $item["variant"];
             $item = $item["item"];
         }
         $item["quantity"] = $quantity;
+        $item["variant"] = $variant;
         $this->smushDuplicateAndPush($item, $quantity);
 
         $price = array_sum(array_map(function($item) {
