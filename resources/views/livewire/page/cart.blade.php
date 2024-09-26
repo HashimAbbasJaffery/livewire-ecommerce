@@ -1,3 +1,4 @@
+@section("title", "Cart")
 <main class="main">
         	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         		<div class="container">
@@ -91,11 +92,11 @@
 	                						</tr><!-- End .summary-subtotal -->
                                             <tr>
                                                 <td>Shipping</td>
-                                                <td>PKR 250</td>
+                                                <td>PKR {{ $setting->shipping_charges }}</td>
                                             </tr>
 	                						<tr class="summary-total">
 	                							<td>Total:</td>
-	                							<td>PKR {{ $total_price + 250 }}</td>
+	                							<td>PKR {{ $total_price + $setting->shipping_charges }}</td>
 	                						</tr><!-- End .summary-total -->
 	                					</tbody>
 	                				</table><!-- End .table table-summary -->

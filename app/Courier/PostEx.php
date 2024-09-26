@@ -47,9 +47,11 @@ class PostEx implements CourierService
         return $response;
     }
     public function track($tracking_number, $version = "v1") {
-        $response = Http::withHeader("token", $this->key)
-                        ->get("{$this->endpoint}/{$version}/track-order/{$tracking_number}")
-                        ->json();
+        $response = cache()->remember($tracking_number, 1800, function() use($version, $tracking_number){
+            return Http::withHeader("token", $this->key)
+                ->get("{$this->endpoint}/{$version}/track-order/{$tracking_number}")
+                ->json();
+        });
         return $response;
     }
 }

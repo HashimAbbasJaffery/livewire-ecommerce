@@ -1,3 +1,4 @@
+@section("title", "Product")
 <main class="main">
             <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
                 <div class="container d-flex align-items-center">

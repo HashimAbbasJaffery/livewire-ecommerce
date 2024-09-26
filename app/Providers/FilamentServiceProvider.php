@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
+use View;
 
 class FilamentServiceProvider extends ServiceProvider
 {

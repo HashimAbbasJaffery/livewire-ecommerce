@@ -1,3 +1,4 @@
+@section("title", "Checkout")
 <main class="main">
         	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         		<div class="container">
@@ -54,7 +55,7 @@
 	            						<input type="text" wire:model.blur="form.apartment" class="form-control @error('form.apartment') border border-danger @enderror" placeholder="Appartments, suite, unit etc ..." required>
 
                                        <div class="row">
-		                					<div class="col-sm-6 mb-3 rounded" style="border: 1px solid #666; padding: 10px; height: 350px; overflow-x:auto;">
+		                					<div class="col-sm-6 mb-3 rounded" style="border: 1px solid #d7d7d7; padding: 10px; height: 350px; overflow-x:auto;">
 		                						<label>Town / City *</label>
                                                 <div class="text-danger">@error('form.city') {{ $message }} @enderror</div>
 	            				                <!-- <input wire:model.blur="form.city" type="text" class="form-control @error('form.city') border border-danger @enderror" required> -->
@@ -66,7 +67,6 @@
                                                         get filteredCities() {
                                                             return this.items.filter(item => item.operationalCityName.toLowerCase().includes(this.search.toLowerCase()))
                                                         }
-
                                                     }"
                                                 >
                                                 <input x-model="search" type="text" class="form-control @error('form.city') border border-danger @enderror" required>
@@ -143,11 +143,11 @@
 		                						</tr><!-- End .summary-subtotal -->
                                                 <tr>
                                                     <td>Shipping</td>
-                                                    <td>PKR 250</td>
+                                                    <td>PKR {{ $setting->shipping_charges }}</td>
                                                 </tr>
 		                						<tr class="summary-total">
 		                							<td>Total:</td>
-		                							<td>PKR {{ (new \App\Services\Cart())->totalPrice($cart) + 250 }}</td>
+		                							<td>PKR {{ (new \App\Services\Cart())->totalPrice($cart) + $setting->shipping_charges }}</td>
 		                						</tr><!-- End .summary-total -->
 		                					</tbody>
 		                				</table><!-- End .table table-summary -->

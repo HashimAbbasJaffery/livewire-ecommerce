@@ -9,7 +9,9 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -33,7 +35,24 @@ class SettingResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make("logo")
-                    ->getImageUrl("/storage/logo")
+                    ->label("Logo")
+                    ->square(),
+                TextColumn::make("phone")
+                    ->label("Phone Number"),
+                TextColumn::make("facebook_link")
+                    ->label("Facebook Link"),
+                TextColumn::make("instagram_link")
+                    ->label("Instagram Link"),
+                BooleanColumn::make("active")
+                    ->label("Active")
+                    ->action(function($record) {
+                        $record->active = !$record->active;
+                        $record->save();
+                    }),
+                TextColumn::make("shipping_charges")
+                    ->label("Shipping Charges")
+
+
             ])
             ->filters([
                 //

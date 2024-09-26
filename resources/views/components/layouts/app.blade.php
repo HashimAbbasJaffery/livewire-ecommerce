@@ -2,24 +2,23 @@
 <html lang="en">
 
 
-<!-- molla/index-6.html  22 Nov 2019 09:56:18 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Molla - Bootstrap eCommerce Template</title>
+    <title>@yield('title') - Hijabebatool</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="description" content="@yield('title') - Hijabebatool">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/storage/logo/logo.jpg">
-    <link rel="icon" type="image/png" sizes="16x16" href="/storage/logo/logo.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/storage/{{ $setting->logo }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="/storage/{{ $setting->logo }}">
     <link rel="manifest" href="/assets/images/icons/site.html">
     <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
-    <link rel="shortcut icon" href="/storage/logo/logo.jpg">
-    <meta name="apple-mobile-web-app-title" content="Molla">
-    <meta name="application-name" content="Molla">
+    <link rel="shortcut icon" href="/storage/{{ $setting->logo }}">
+    <meta name="apple-mobile-web-app-title" content="Hijabebatool">
+    <meta name="application-name" content="Hijabebatool">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
@@ -456,7 +455,7 @@ html {
                         <div class="banner-content text-center">
                             <img src="/assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
                             <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
-                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
+                            <p>Subscribe to the Hijabebatool eCommerce newsletter to receive timely updates from your favorite products.</p>
                             <form action="#">
                                 <div class="input-group input-group-round">
                                     <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
@@ -538,5 +537,4 @@ html {
 </body>
 
 
-<!-- molla/index-6.html  22 Nov 2019 09:56:39 GMT -->
 </html>

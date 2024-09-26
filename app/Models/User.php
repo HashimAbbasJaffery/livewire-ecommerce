@@ -18,7 +18,7 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var array<int, string>
      */
-    protected $with = ["wishlists"];
+    // protected $with = ["wishlists"];
     protected $fillable = [
         'name',
         'email',

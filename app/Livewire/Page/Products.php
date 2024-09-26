@@ -20,6 +20,7 @@ class Products extends Component
     public $colorsList = [];
     public $price = [0,0];
     public $keyword = "";
+    public $first_loading = true;
 
 
     #[On('price-change')]
@@ -37,11 +38,13 @@ class Products extends Component
     public function render()
     {
         $categories = Category::withCount("products")->whereHas("products")->limit(10)->get();
-        $colors = Color::whereHas("images")->get();
+        $colors = Color::get();
         $products = Product::filter($this->filters())
+                            ->with("images")
                             ->whereBetween("price", $this->price)
                             ->where("title", "like", "%" . $this->keyword . "%")
                             ->paginate(8);
+        $this->first_loading = false;
         return view('livewire.page.products', compact("categories", "colors", "products"));
     }
     #[On('ordered-product')]

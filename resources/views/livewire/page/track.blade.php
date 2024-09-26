@@ -1,3 +1,4 @@
+@section("title", "Track")
 <div class="container mx-auto">
     <form action="" wire:loading.attr="disabled" wire:target="track" class="mt-3 mb-3" wire:submit="track">
         <label for="tracking_number float-left">

@@ -50,7 +50,6 @@ class ViewOrder extends ViewRecord
                         }),
                     ImageEntry::make("Image")
                         ->getStateUsing(function($record) {
-                            dd($record->pivot);
                             return $record->pivot->variant ?? "dummy.jpg";
                         })
                 ]),
@@ -71,7 +70,7 @@ class ViewOrder extends ViewRecord
                             foreach($record->products as $product) {
                                 $total += $product->pivot->price * $product->pivot->quantity;
                             }
-                            return ($total + 250) . " RS";
+                            return ($total + session()->get("shipping") ?? 0) . " RS";
                         })
                 ])
         ]);

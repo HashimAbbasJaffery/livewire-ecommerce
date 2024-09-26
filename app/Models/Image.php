@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
-    protected $with = ["color"];
+    // protected $with = ["color"];
     protected $guarded = ["id", "created_at", "updated_at"];
 
     public function product() {

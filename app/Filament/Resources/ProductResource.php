@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Models\Category;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -75,9 +76,10 @@ class ProductResource extends Resource
                                 TextInput::make("color")
                             ])
                             ->createOptionUsing(function($data) {
-                                return \App\Models\Color::create([
+                                $color = \App\Models\Color::create([
                                     "color" => $data["color"]
                                 ]);
+                                return $color->id;
                             })
                     ]),
                 Select::make("categories")
@@ -85,9 +87,16 @@ class ProductResource extends Resource
                     ->relationship("categories")
                     ->multiple()
                     ->options(
-                        \App\Models\Category::pluck("category", "id")->toArray()
+                        Category::pluck("category", "id")->toArray()
                     )
                     ->searchable()
+                    ->getSearchResultsUsing(function (string $search) {
+                        return Category::where('category', 'like', "%{$search}%")->limit(50)->pluck("category", "id")->toArray();
+                    })
+                    ->getOptionLabelsUsing(function (array $values) {
+                        return Category::where("id", $values)->pluck("category", "id")->toArray();
+                    }),
+
 
             ]);
     }

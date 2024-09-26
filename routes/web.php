@@ -20,6 +20,7 @@ Route::get("/cart", \App\Livewire\Page\Cart::class)->name("cart");
 Route::get("/checkout", \App\Livewire\Page\Checkout::class)->name("checkout");
 Route::get("/ordered", \App\Livewire\OrderProduct::class)->name("ordered");
 Route::get("/track", App\Livewire\Page\Track::class)->name("track");
+Route::get("/orders", App\Livewire\Page\Orders::class)->name("orders");
 
 Route::get('/dashboard', function () {
     return view('dashboard');

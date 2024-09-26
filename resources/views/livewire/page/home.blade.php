@@ -1,4 +1,4 @@
-
+@section("title", "Home")
 <main class="main">
 
 

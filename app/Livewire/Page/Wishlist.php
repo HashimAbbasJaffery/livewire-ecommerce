@@ -21,6 +21,6 @@ class Wishlist extends Component
         $wishlists = $this->user->wishlists()->detach($id);
     }
     public function addToCart($item) {
-        $this->dispatch("add-to-cart", $item)->to(Header::class);
+        $this->dispatch("add-to-cart", ["item" => $item, "quantity" => 1, "variant" => $item["images"][0]["image"]])->to(Header::class);
     }
 }

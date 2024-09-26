@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Livewire\Page\Products;
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\User;
 use App\Services\Cart;
 use Auth;

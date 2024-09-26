@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $with = ["images", "orders"];
+    // protected $with = ["images", "orders"];
     protected $guarded = ["id", "created_at", "updated_at"];
     public function images() {
-        return $this->hasMany(Image::class)->select("color", "image", "product_id");
+        return $this->hasMany(Image::class);
     }
     public function orders() {
         return $this->belongsToMany(Order::class);

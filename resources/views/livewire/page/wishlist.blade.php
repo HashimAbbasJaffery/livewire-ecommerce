@@ -1,4 +1,4 @@
-
+@section("title", "Wishlist")
 <main class="main">
         	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         		<div class="container">

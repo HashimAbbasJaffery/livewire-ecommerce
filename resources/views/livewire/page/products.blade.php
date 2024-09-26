@@ -1,4 +1,4 @@
-
+@section("title", "Shop")
 <main class="main">
             <div class="page-content mt-3">
                 <div class="container">
@@ -35,8 +35,8 @@
 
                                 {{ $products->links('pagination.pagination') }}
 
-                            </div><!-- End .col-lg-9 -->
-                		<aside class="col-lg-3 order-lg-first">
+                        </div><!-- End .col-lg-9 -->
+                       <aside class="col-lg-3 order-lg-first">
                 			<div class="sidebar sidebar-shop"><!-- End .widget widget-clean -->
                                <div class="widget widget-collapsible">
     								<h3 class="widget-title">
