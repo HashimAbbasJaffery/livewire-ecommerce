@@ -1,5 +1,8 @@
 @section("title", "Product")
 <main class="main">
+<div class="loading" wire:loading wire:target="addToCart" style="border-radius: 0px; background: black; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+    <span class="loader"></span>
+</div>
             <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
                 <div class="container d-flex align-items-center">
                     <ol class="breadcrumb">
@@ -69,11 +72,12 @@
 
                                     <div class="product-details-action">
                                         <a href="#" class="btn-product btn-cart" wire:click="addToCart()"><span>add to cart</span></a>
-
-                                        <div class="details-action-wrapper">
-                                            <a wire:loading.remove wire:target="" wire:target="addToWishlist({{ $product->id }})" wire:click="addToWishlist({{ $product->id }})" class="btn-product btn-wishlist" title="Wishlist"><span>{{ $is_wishlist ? "Remove From Wishlist" : "Add To Wishlist" }}</span></a>
-                                            <div wire:loading wire:target="addToWishlist({{ $product->id }})" class="spinner-black ml-3"></div>
-                                        </div><!-- End .details-action-wrapper -->
+                                        @auth
+                                            <div class="details-action-wrapper">
+                                                <a wire:loading.remove wire:target="" wire:target="addToWishlist({{ $product->id }})" wire:click="addToWishlist({{ $product->id }})" class="btn-product btn-wishlist" title="Wishlist"><span>{{ $is_wishlist ? "Remove From Wishlist" : "Add To Wishlist" }}</span></a>
+                                                <div wire:loading wire:target="addToWishlist({{ $product->id }})" class="spinner-black ml-3"></div>
+                                            </div><!-- End .details-action-wrapper -->
+                                        @endauth
                                     </div><!-- End .product-details-action -->
 
                                     <div class="product-details-footer">

@@ -1,18 +1,22 @@
 
-<div class="product product-{{ $product->id }} text-center">
-<figure class="product-media" style="position: relative;">
+<div class="product product-{{ $product->id }} text-center" style="position: relative;">
+    <figure class="product-media" style="position: relative;">
+    <div class="changingImage" wire:loading.flex="changeCurrency" wire:targe="changeThumbnail" style="display: noone; justify-content: center; align-items: center; opacity: 0.5; background: black; height: 100%; position: absolute; z-index: 99; width: 100%;">
+    <span class="loader"></span>
+    </div>
                         <a href="{{ route("product", [ 'product' => $product->id ]) }}" style="height: 253px;">
                             <img src="/storage/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image">
                             <img src="/storage/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image-hover">
                         </a>
-
-                        <div class="product-action-vertical">
-                            @if(!$is_wishlist)
-                                <a wire:click="wishlist('{{ $product->id }}')" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            @else
-                                <a wire:click="wishlist('{{ $product->id }}')" class="btn-product-icon btn-wishlist btn-expandable"><span>Remove from wishlist</span></a>
-                            @endif
-                        </div><!-- End .product-action-vertical -->
+                        @auth
+                            <div class="product-action-vertical">
+                                @if(!$is_wishlist)
+                                    <a wire:click="wishlist('{{ $product->id }}')" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                @else
+                                    <a wire:click="wishlist('{{ $product->id }}')" class="btn-product-icon btn-wishlist btn-expandable"><span>Remove from wishlist</span></a>
+                                @endif
+                            </div><!-- End .product-action-vertical -->
+                        @endauth
 
                         <div class="product-action">
                             <form wire:target="addToCart" wire:submit.prevent="addToCart({{ $product }})" wire:loading.attr="disabled" style="display: inline-block; width: 100%;">
@@ -23,7 +27,6 @@
                             </form>
                         </div><!-- End .product-action -->
                     </figure><!-- End .product-media -->
-
                     <div class="product-body">
                         <div class="product-cat">
                             <a href="#">{{ $product->categories[0]?->category ?? "Not assigned" }}</a>

@@ -1,7 +1,7 @@
 @section("title", "Orders")
 
 <div class="container mx-auto my-5">
-    @if(count($orders) > 1)
+    @if(count($orders) > 0)
         <div class="orders">
             <div class="order">
                 <table class="table table-cart table-mobile" style="text-align: center;">

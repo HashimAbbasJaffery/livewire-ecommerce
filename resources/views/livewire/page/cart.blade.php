@@ -1,5 +1,8 @@
 @section("title", "Cart")
 <main class="main">
+<div class="loading" wire:loading style="border-radius: 0px; background: black; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+    <span class="loader"></span>
+</div>
         	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         		<div class="container">
         			<h1 class="page-title">Shopping Cart<span>Shop</span></h1>
@@ -34,6 +37,7 @@
                                   	<tbody>
                                         @foreach($cart as $key => $product)
                                        <tr wire:key="{{ $product['variant'] }}">
+                                            <div class="loading-wrapper" style="background: white; opacity: 0.5;">&nbsp;</div>
 											<td class="product-col">
 												<div class="product">
 													<figure class="product-media">

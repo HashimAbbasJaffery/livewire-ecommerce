@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use App\Policies\CoursePolicy;
 use Gate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Course;
 use View;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
             session()->put("shipping", $setting->shipping_charges);
             $view->with("setting", $setting);
         });
+
     }
 }

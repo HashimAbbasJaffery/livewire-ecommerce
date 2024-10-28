@@ -23,8 +23,9 @@
 </div><!-- End .container -->
 
 <div class="mb-5"></div><!-- End .mb-5 -->
-
-<livewire:deal :$deals></livewire:deal>
+@if(count($deals) > 0)
+    <livewire:deal :$deals></livewire:deal>
+@endif
 
 
 <div class="mb-6"></div><!-- End .mb-5 -->

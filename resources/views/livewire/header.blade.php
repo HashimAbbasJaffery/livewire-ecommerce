@@ -1,5 +1,8 @@
 @section("image", $setting->logo)
 <header class="header header-6">
+    <div class="loading" wire:loading wire:target="removeFromCart" style="border-radius: 0px; background: black; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+        <span class="loader"></span>
+    </div>
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
@@ -29,7 +32,7 @@
                                 @endauth
                                 @guest
                                     <form action="{{ route('login') }}">
-                                        <button style="border: none;" type="submit">Login</button>
+                                        <button style="border: none; background: #c96; color: white; border-radius: 4px; margin-bottom: 10px;" type="submit">Login</button>
                                     </form>
                                 @endguest
 
@@ -102,7 +105,10 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                     <div class="dropdown-cart-products">
                                         @foreach($cart as $product)
-                                        <div class="product" wire:key="{{ $product['id'] }}">
+                                        <div class="product" style="position: relative;" wire:key="{{ $product['id'] }}">
+                                            <div class="deleting" wire:loading.flex wire:target="removeFromCart('{{ $product["variant"] }}')" style="display: none; justify-content: center; align-items: center; background: white; position: absolute; width: 100%; z-index: 10; height: 100%; opacity: 0.5;">
+                                                &nbsp;
+                                            </div>
                                             <div class="product-cart-details">
                                                 <h4 class="product-title">
                                                     <a href="product.html">{{ $product["title"] }}</a>
@@ -119,7 +125,7 @@
                                                     <img src="/storage/{{ $product["variant"] ? $product["variant"] : $product['images'][0]['image'] }}" alt="product">
                                                 </a>
                                             </figure>
-                                            <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["variant"] }}')"><i class="icon-close"></i></a>
+                                            <a class="btn-remove" title="Remove Product" wire:click.prevent="removeFromCart('{{ $product["variant"] }}')"><i class="icon-close"></i></a>
 
                                             <!-- <span style="display: inline;" class="spinner-black ml-3"></span> -->
                                         </div><!-- End .product -->
@@ -134,7 +140,7 @@
                                     </div><!-- End .dropdown-cart-total -->
 
                                     <div class="dropdown-cart-action">
-                                        <a href="{{ route('cart') }}" class="btn btn-primary">View Cart</a>
+                                        <a href="{{ route('cart') }}" class="btn btn-primary text-white">View Cart</a>
                                         <a href="{{ route('checkout') }}" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                                     </div><!-- End .dropdown-cart-total -->
 
