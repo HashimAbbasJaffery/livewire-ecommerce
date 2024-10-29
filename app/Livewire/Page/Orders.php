@@ -17,7 +17,7 @@ class Orders extends Component
     public function render()
     {
         $user = User::with("orders.products")->find(auth()->id());
-        $orders = $user->orders;
+        $orders = $user->orders()->latest()->get();
 
         return view('livewire.page.orders', compact("orders"));
     }

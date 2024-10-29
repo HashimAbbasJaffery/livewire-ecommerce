@@ -14,7 +14,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--[if BLOCK]><![endif]-->
                         @foreach($orders as $order)
                             @foreach($order->products as $product)
                                 <tr wire:key="{{ $product->id }}">

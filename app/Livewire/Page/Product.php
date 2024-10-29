@@ -30,6 +30,13 @@ class Product extends Component
         $this->dispatch("add-to-cart", [ "item" => $this->product, "quantity" => $this->quantity, "variant" => $this->selected])->to(Header::class);
     }
     public function changeSelected($image) {
+        $filtered = array_filter($this->images, function($img) use ($image){
+            return $image === $img["image"];
+        });
+        $first_item = $this->images[0];
+        $key = array_key_first($filtered);
+        $this->images[0] = reset($filtered);
+        $this->images[$key] = $first_item;
         $this->selected = $image;
     }
     public function addToWishlist($id, Wishlist $wishlist) {

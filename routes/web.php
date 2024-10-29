@@ -13,7 +13,16 @@ Route::get("/test", function() {
 Route::get('/', \App\Livewire\Page\Home::class)->name("home");
 
 
-Route::get("/product/{product}", \App\Livewire\Page\Product::class)->name("product");
+Route::get("/test", function() {
+    $products = Product::all();
+
+    foreach($products as $product) {
+        $product->slug = str($product->title)->slug();
+        $product->save();
+    }
+});
+
+Route::get("/product/{product:slug}", \App\Livewire\Page\Product::class)->name("product");
 Route::get("/products", \App\Livewire\Page\Products::class)->name("products");
 Route::get("/wishlists", \App\Livewire\Page\Wishlist::class)->name("wishlists");
 Route::get("/cart", \App\Livewire\Page\Cart::class)->name("cart");

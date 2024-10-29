@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\SortingEnum;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,6 +36,17 @@ class Product extends Model
             $query->whereHas("images", function($query) use ($filters) {
                 $query->whereIn("images.color", $filters["colors"]);
             });
+        });
+    }
+
+    protected static function boot() {
+        parent::boot();
+        static::creating(function($model) {
+            $model->slug = str()->slug($model->title);
+        });
+
+        static::updating(function($model) {
+            $model->slug = str()->slug($model->title);
         });
     }
 }

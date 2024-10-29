@@ -1,5 +1,9 @@
 @section("title", "Checkout")
 <main class="main">
+
+<div class="loading" wire:loading wire:target="save" style="border-radius: 0px; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+    <span class="loader"></span>
+</div>
         	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         		<div class="container">
         			<h1 class="page-title">Checkout<span>Shop</span></h1>

@@ -1,6 +1,9 @@
 @section("image", $setting->logo)
 <header class="header header-6">
-    <div class="loading" wire:loading wire:target="removeFromCart" style="border-radius: 0px; background: black; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+    <div class="loading" wire:loading wire:target="removeFromCart" style="border-radius: 0px; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+        <span class="loader"></span>
+    </div>
+    <div class="loading" wire:loading wire:target="addToCart" style="border-radius: 0px; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
         <span class="loader"></span>
     </div>
             <div class="header-top">
@@ -25,15 +28,20 @@
                                     <div class="options" style="display: flex; justify-content: space-space-between; width: 10%; padding: 2px;">
                                         <form method="POST" class="mb-2" action="{{ route("logout") }}" style="display: inline-block;">
                                             @csrf
-                                            <button type="submit" class="mr-3" style="border: none;">Logout</button>
+                                            <button type="submit" class="mr-3" style="border: none; background: #c96; color: white; border-radius: 4px; margin-bottom: 10px;">Logout</button>
                                         </form>
                                         <p class="mr-2">{{ auth()->user()->name }}</p>
                                     </div>
                                 @endauth
                                 @guest
-                                    <form action="{{ route('login') }}">
-                                        <button style="border: none; background: #c96; color: white; border-radius: 4px; margin-bottom: 10px;" type="submit">Login</button>
-                                    </form>
+                                    <div class="actions" style="display: flex;">
+                                        <form action="{{ route('login') }}" class="mr-3">
+                                            <button style="border: none; background: #c96; color: white; border-radius: 4px; margin-bottom: 10px;" type="submit">Login</button>
+                                        </form>
+                                        <form action="{{ route('register') }}">
+                                            <button style="border: none; background: #c96; color: white; border-radius: 4px; margin-bottom: 10px;" type="submit">Register</button>
+                                        </form>
+                                    </div>
                                 @endguest
 
                             </li>

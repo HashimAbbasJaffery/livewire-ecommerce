@@ -4,7 +4,10 @@
     <div class="changingImage" wire:loading.flex="changeCurrency" wire:targe="changeThumbnail" style="display: noone; justify-content: center; align-items: center; opacity: 0.5; background: black; height: 100%; position: absolute; z-index: 99; width: 100%;">
     <span class="loader"></span>
     </div>
-                        <a href="{{ route("product", [ 'product' => $product->id ]) }}" style="height: 253px;">
+    <div class="loading" wire:loading wire:target="wishlist" style="border-radius: 0px; background: black; width: 100px; border-radius: 0px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20;">
+        <span class="loader"></span>
+    </div>
+                        <a href="{{ route("product", [ 'product' => $product->slug ]) }}" style="height: 253px;">
                             <img src="/storage/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image">
                             <img src="/storage/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image-hover">
                         </a>
@@ -38,7 +41,7 @@
 
                         <div class="product-nav product-nav-thumbs" wire:ignore>
                             @foreach($images as $image)
-                            <a wire:key="image-{{ $image->id }}" @class(['active' => $thumbnail === $image->image]) stye="cursor: pointer;">
+                            <a wire:key="image-{{ $image->id }}" @class(['active' => $thumbnail === $image->image]) style="cursor: pointer;">
                                 <img wire:click="changeThumbnail('{{ $image->image }}')" src="/storage/{{ $image->image }}" alt="product desc">
                             </a>
                             @endforeach
