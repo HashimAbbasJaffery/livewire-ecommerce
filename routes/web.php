@@ -14,12 +14,7 @@ Route::get('/', \App\Livewire\Page\Home::class)->name("home");
 
 
 Route::get("/test", function() {
-    $products = Product::all();
-
-    foreach($products as $product) {
-        $product->slug = str($product->title)->slug();
-        $product->save();
-    }
+    session()->put("cart", []);
 });
 
 Route::get("/product/{product:slug}", \App\Livewire\Page\Product::class)->name("product");

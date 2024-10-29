@@ -8,8 +8,8 @@
         <span class="loader"></span>
     </div>
                         <a href="{{ route("product", [ 'product' => $product->slug ]) }}" style="height: 253px;">
-                            <img src="/storage/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image">
-                            <img src="/storage/{{ $thumbnail }}" loading="lazy" alt="Product image" class="product-image-hover">
+                            <img src="{{asset("/storage/$thumbnail")}}" loading="lazy" alt="Product image" class="product-image">
+                            <img src="{{asset("/storage/$thumbnail")}}" loading="lazy" alt="Product image" class="product-image-hover">
                         </a>
                         @auth
                             <div class="product-action-vertical">
@@ -42,7 +42,7 @@
                         <div class="product-nav product-nav-thumbs" wire:ignore>
                             @foreach($images as $image)
                             <a wire:key="image-{{ $image->id }}" @class(['active' => $thumbnail === $image->image]) style="cursor: pointer;">
-                                <img wire:click="changeThumbnail('{{ $image->image }}')" src="/storage/{{ $image->image }}" alt="product desc">
+                                <img wire:click="changeThumbnail('{{ $image->image }}')" src="{{asset("/storage/$image->image")}}" alt="product desc">
                             </a>
                             @endforeach
                         </div><!-- End .product-nav -->

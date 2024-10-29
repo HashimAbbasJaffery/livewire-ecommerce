@@ -11,30 +11,30 @@
     <meta name="description" content="@yield('title') - Hijabebatool">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/assets/images/icons/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="/storage/{{ $setting->logo }}">
     <link rel="icon" type="image/png" sizes="16x16" href="/storage/{{ $setting->logo }}">
-    <link rel="manifest" href="/assets/images/icons/site.html">
-    <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+    <link rel="manifest" href="{{asset('/assets/images/icons/site.htm')}}l">
+    <link rel="mask-icon" href="{{asset('/assets/images/icons/safari-pinned-tab.svg')}}" color="#666666">
     <link rel="shortcut icon" href="/storage/{{ $setting->logo }}">
     <meta name="apple-mobile-web-app-title" content="Hijabebatool">
     <meta name="application-name" content="Hijabebatool">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
+    <meta name="msapplication-config" content="{{asset('/assets/images/icons/browserconfig.xml')}}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css')}}">
     <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
-    <link rel="stylesheet" href="/assets/css/plugins/jquery.countdown.css">
+    <link rel="stylesheet" href="{{ asset("assets/css/bootstrap.min.css") }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/jquery.countdown.css')}}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/skins/skin-demo-6.css">
-    <link rel="stylesheet" href="/assets/css/demos/demo-6.css">
+    <link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/skins/skin-demo-6.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/demos/demo-6.css')}}">
 
-    <link rel="stylesheet" href="assets/css/plugins/magnific-popup/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/plugins/nouislider/nouislider.css">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/magnific-popup/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/nouislider/nouislider.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <script src="https://kit.fontawesome.com/3a7e8b6e65.js" crossorigin="anonymous"></script>
 
@@ -152,7 +152,7 @@ html {
 
 <body style="position: relative;">
     <a href="https://wa.me/+923002862366" target="_blank">
-        <img src="/images/whatsapp.png" width="50" style="position: fixed; z-index: 2; bottom: 10px; right: 10px; cursor: pointer;">
+        <img src="{{asset('images/whatsapp.png')}}" width="50" style="position: fixed; z-index: 2; bottom: 10px; right: 10px; cursor: pointer;">
     </a>
     <div class="page-wrapper">
         <livewire:header></livewire:header>
@@ -453,7 +453,7 @@ html {
                 <div class="row no-gutters bg-white newsletter-popup-content">
                     <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
                         <div class="banner-content text-center">
-                            <img src="/assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
+                            <img src="{{asset('/assets/images/popup/newsletter/logo.png')}}" class="logo" alt="logo" width="60" height="15">
                             <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
                             <p>Subscribe to the Hijabebatool eCommerce newsletter to receive timely updates from your favorite products.</p>
                             <form action="#">
@@ -471,7 +471,7 @@ html {
                         </div>
                     </div>
                     <div class="col-xl-2-5col col-lg-5 ">
-                        <img src="/assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
+                        <img src="{{asset('/assets/images/popup/newsletter/img-1.jpg')}}" class="newsletter-img" alt="newsletter">
                     </div>
                 </div>
             </div>
@@ -518,22 +518,22 @@ html {
         @livewireScripts
 
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/jquery.hoverIntent.min.js"></script>
-    <script src="/assets/js/jquery.waypoints.min.js"></script>
-    <script src="/assets/js/superfish.min.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/bootstrap-input-spinner.js"></script>
-    <script src="/assets/js/jquery.plugin.min.js"></script>
-    <script src="/assets/js/jquery.countdown.min.js"></script>
-    <script src="assets/js/wNumb.js"></script>
+    <script src="{{asset('/assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('/assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('/assets/js/jquery.hoverIntent.min.js')}}"></script>
+    <script src="{{asset('/assets/js/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('/assets/js/superfish.min.js')}}"></script>
+    <script src="{{asset('/assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('/assets/js/bootstrap-input-spinner.js')}}"></script>
+    <script src="{{asset('/assets/js/jquery.plugin.min.js')}}"></script>
+    <script src="{{asset('/assets/js/jquery.countdown.min.js')}}"></script>
+    <script src="{{asset('assets/js/wNumb.js')}}"></script>
     <!-- <script src="assets/js/jquery.magnific-popup.min.js"></script> -->
-    <script src="assets/js/nouislider.min.js"></script>
+    <script src="{{asset('assets/js/nouislider.min.js')}}"></script>
     <!-- Main JS File -->
 
     <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
 </body>
 
 
