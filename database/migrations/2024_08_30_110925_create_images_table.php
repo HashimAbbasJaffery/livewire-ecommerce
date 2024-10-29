@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("color")->nullable();
             $table->string("image");
+            $table->boolean("status")->default(1);
             $table->foreignId("product_id")->constrained("products")->cascadeOnDelete();
             $table->timestamps();
         });

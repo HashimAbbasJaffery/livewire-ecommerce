@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Category;
@@ -30,5 +31,15 @@ class DatabaseSeeder extends Seeder
             Category::factory(10)->create();
         }
         Color::factory(50)->create();
+
+
+        Setting::create([
+            "logo" => "logo/logo.jpg",
+            "phone" => "8765432",
+            "facebook_link" => "76543",
+            "instagram_link" => "dfdfdf",
+            "shipping_charges" => 250,
+            "active" => 1
+        ]);
     }
 }
