@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/jquery.countdown.css')}}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">
+    <link rel="stylesheet" href="../../../public/assets/css/style.css">
     <link rel="stylesheet" href="{{asset('assets/css/skins/skin-demo-6.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/demos/demo-6.css')}}">
 
